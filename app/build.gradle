@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply from: '../config/quality.gradle'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+def cfg = rootProject.ext.configuration
+def lib = rootProject.ext.libraries
+
+android {
+    compileSdkVersion cfg.compileSdkVersion
+    buildToolsVersion '23.0.2'
+
+    defaultConfig {
+        applicationId cfg.package
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionName cfg.versionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            testCoverageEnabled true
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "com.android.support:appcompat-v7:${lib.supportVersion}"
+    compile "com.android.support:design:${lib.supportVersion}"
+    compile "com.android.support:support-annotations:${lib.supportVersion}"
+
+    //google
+    apt "com.google.dagger:dagger-compiler:${lib.dagger}"
+    compile "com.google.dagger:dagger:${lib.dagger}"
+    provided "javax.annotation:jsr250-api:${lib.jsr250}"
+
+    //Rx
+    compile "io.reactivex:rxjava:${lib.rxjava}"
+    compile "io.reactivex:rxandroid:${lib.rxandroid}"
+
+    //bindings
+    compile "com.jakewharton.rxbinding:rxbinding:${lib.rxbinding}"
+    compile "com.jakewharton.rxbinding:rxbinding-support-v4:${lib.rxbinding}"
+    compile "com.jakewharton:butterknife:${lib.butterknife}"
+
+    //square
+    compile ("com.squareup.retrofit:retrofit:${lib.retrofit}") {
+        // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
+        exclude module: 'okhttp'
+    }
+    compile "com.squareup.okhttp:okhttp:${lib.okhttp}"
+    compile "com.squareup.retrofit:converter-moshi:${lib.retrofit}"
+    compile "com.squareup.retrofit:converter-gson:${lib.retrofit}"
+    compile "com.squareup.retrofit:adapter-rxjava:${lib.retrofit}"
+
+    //for ui test run on device or emulator
+//    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2"
+//    androidTestCompile "com.android.support:support-annotations:${lib.supportVersion}"
+//    androidTestCompile "com.android.support.test:runner:0.3"
+//    androidTestCompile "com.android.support.test:rules:0.3"
+
+    //for unit test run on jvm
+    testCompile "junit:junit:${lib.junit}"
+    testCompile "org.mockito:mockito-core:${lib.mockito}"
+}
+
