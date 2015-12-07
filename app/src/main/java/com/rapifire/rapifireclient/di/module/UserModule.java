@@ -2,7 +2,7 @@ package com.rapifire.rapifireclient.di.module;
 
 import com.rapifire.rapifireclient.data.cache.MemoryCache;
 import com.rapifire.rapifireclient.data.network.BasicAuthInterceptor;
-import com.rapifire.rapifireclient.data.network.RapidfireSession;
+import com.rapifire.rapifireclient.data.network.RapifireSession;
 import com.rapifire.rapifireclient.data.network.ThingsService;
 import com.rapifire.rapifireclient.data.repository.ThingsDataRepository;
 import com.rapifire.rapifireclient.di.UserScope;
@@ -19,17 +19,17 @@ import retrofit.Retrofit;
 @Module
 public class UserModule {
 
-    private RapidfireSession rapidfireSession;
+    private RapifireSession rapifireSession;
 
 
-    public UserModule(RapidfireSession rapidfireSession) {
-        this.rapidfireSession = rapidfireSession;
+    public UserModule(RapifireSession rapifireSession) {
+        this.rapifireSession = rapifireSession;
     }
 
     @Provides
     @UserScope
-    public RapidfireSession provideRapidfireSession() {
-        return rapidfireSession;
+    public RapifireSession provideRapifireSession() {
+        return rapifireSession;
     }
 
     @Provides
@@ -66,7 +66,7 @@ public class UserModule {
 
     @Provides
     @UserScope
-    public BasicAuthInterceptor provideBasicAuthInterceptor(RapidfireSession rapidfireSession) {
-        return new BasicAuthInterceptor(rapidfireSession.username, rapidfireSession.password);
+    public BasicAuthInterceptor provideBasicAuthInterceptor(RapifireSession rapifireSession) {
+        return new BasicAuthInterceptor(rapifireSession.username, rapifireSession.password);
     }
 }

@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.rapifire.rapifireclient.R;
-import com.rapifire.rapifireclient.RapidfireApp;
+import com.rapifire.rapifireclient.RapifireApp;
 import com.rapifire.rapifireclient.di.components.SignInActivityComponent;
 import com.rapifire.rapifireclient.di.module.SignInActivityModule;
 import com.rapifire.rapifireclient.mvp.presenter.SignInPresenter;
@@ -59,7 +59,7 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
     }
 
     protected void setupActivityComponent() {
-        final SignInActivityComponent signInActivityComponent = RapidfireApp.get(this)
+        final SignInActivityComponent signInActivityComponent = RapifireApp.get(this)
                 .getAppComponent()
                 .plus(new SignInActivityModule(this));
         signInActivityComponent.inject(this);

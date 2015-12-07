@@ -2,7 +2,7 @@ package com.rapifire.rapifireclient.di.module;
 
 import android.app.Application;
 
-import com.rapifire.rapifireclient.RapidfireApp;
+import com.rapifire.rapifireclient.RapifireApp;
 import com.rapifire.rapifireclient.di.UserComponentBuilder;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -27,9 +27,9 @@ public class AppModule {
     //change it to final field and pass by constructor
     public static final String BASE_URL = "http://rapifire.com/api/v1/";
 
-    private final RapidfireApp application;
+    private final RapifireApp application;
 
-    public AppModule(RapidfireApp application) {
+    public AppModule(RapifireApp application) {
         this.application = application;
     }
 

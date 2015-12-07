@@ -1,6 +1,6 @@
 package com.rapifire.rapifireclient.mvp.presenter;
 
-import com.rapifire.rapifireclient.data.network.RapidfireSession;
+import com.rapifire.rapifireclient.data.network.RapifireSession;
 import com.rapifire.rapifireclient.di.ActivityScope;
 import com.rapifire.rapifireclient.di.UserComponentBuilder;
 import com.rapifire.rapifireclient.domain.interactor.SignInUseCase;
@@ -54,9 +54,9 @@ public class SignInPresenter implements Presenter<SigninView> {
         @Override
         public void onCompleted() {
             view.showProgress(false);
-            final RapidfireSession rapidfireSession = new RapidfireSession(view.getUsername(),
+            final RapifireSession rapifireSession = new RapifireSession(view.getUsername(),
                     view.getPassword());
-            userComponentBuilder.createUserComponent(rapidfireSession);
+            userComponentBuilder.createUserComponent(rapifireSession);
             view.navigateToThings();
         }
 
