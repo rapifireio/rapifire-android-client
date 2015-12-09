@@ -1,0 +1,50 @@
+package com.rapifire.rapifireclient.di.module;
+
+import com.rapifire.rapifireclient.data.repository.ThingsDataRepository;
+import com.rapifire.rapifireclient.di.ActivityScope;
+import com.rapifire.rapifireclient.domain.interactor.GetThingDetailsUseCase;
+import com.rapifire.rapifireclient.domain.interactor.GetThingsUseCase;
+import com.rapifire.rapifireclient.domain.interactor.RefreshThingDetailsUseCase;
+import com.rapifire.rapifireclient.domain.interactor.RefreshThingsUseCase;
+import com.rapifire.rapifireclient.view.activity.ThingDetailsActivity;
+import com.rapifire.rapifireclient.view.activity.ThingsActivity;
+import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
+
+import javax.inject.Named;
+
+import dagger.Module;
+import dagger.Provides;
+import rx.Scheduler;
+
+@Module
+public class ThingDetailsModule {
+
+    private ThingDetailsActivity thingDetailsActivity;
+
+    public ThingDetailsModule(ThingDetailsActivity thingDetailsActivity) {
+        this.thingDetailsActivity = thingDetailsActivity;
+    }
+
+    @Provides
+    @ActivityScope
+    public ThingDetailsActivity provideTimelineActivity() {
+        return thingDetailsActivity;
+    }
+
+
+    @Provides
+    @ActivityScope
+    public GetThingDetailsUseCase provideGetThingDetailsUseCase(@Named("postWorkScheduler") Scheduler postScheduler,
+                                                    @Named("workerScheduler") Scheduler workerSheduler,
+                                                    ThingsDataRepository thingsRepository) {
+        return new GetThingDetailsUseCase(workerSheduler,postScheduler,  thingsRepository);
+    }
+
+    @Provides
+    @ActivityScope
+    public RefreshThingDetailsUseCase provideRefGetThingsUseCase(@Named("postWorkScheduler") Scheduler postScheduler,
+                                                           @Named("workerScheduler") Scheduler workerSheduler,
+                                                           ThingsDataRepository thingsRepository) {
+        return new RefreshThingDetailsUseCase(workerSheduler,postScheduler, thingsRepository);
+    }
+}

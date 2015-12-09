@@ -1,28 +1,20 @@
 package com.rapifire.rapifireclient.view.fragment;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.rapifire.rapifireclient.R;
-import com.rapifire.rapifireclient.domain.model.ThingModel;
-import com.rapifire.rapifireclient.mvp.presenter.ThingsPresenter;
-import com.rapifire.rapifireclient.mvp.view.ThingsView;
-import com.rapifire.rapifireclient.view.activity.ThingDetailsActivity;
-import com.rapifire.rapifireclient.view.activity.ThingsActivity;
-import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
-import com.rapifire.rapifireclient.view.adapter.ThingsAdapterListener;
-
-import java.util.List;
+import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
+import com.rapifire.rapifireclient.mvp.presenter.ThingDetailsPresenter;
+import com.rapifire.rapifireclient.mvp.view.ThingDetailsView;
 
 import javax.inject.Inject;
 
@@ -30,26 +22,22 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by ktomek on 05.12.15.
+ * Created by witek on 08.12.15.
  */
-public class ThingsFragment extends Fragment implements ThingsView,
-        SwipeRefreshLayout.OnRefreshListener, ThingsAdapterListener {
+public class ThingDetailsFragment extends Fragment implements ThingDetailsView, SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
-    ThingsAdapter mAdapter;
-    @Inject
-    ThingsPresenter mThingsPresenter;
+    ThingDetailsPresenter mThingDetailsPresenter;
 
     @Bind(R.id.progress_bar)
     ProgressBar mProgressBar;
-    @Bind(R.id.timeline_recycler_view)
-    RecyclerView mRecyclerView;
     @Bind(R.id.swipe_to_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    public ThingsFragment() {
-    }
-
+    @Bind(R.id.thing_id_text_view)
+    TextView mThingIdTextView;
+    @Bind(R.id.thing_name_text_tiew)
+    TextView mThingNameTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,13 +49,11 @@ public class ThingsFragment extends Fragment implements ThingsView,
                              Bundle savedInstanceState) {
         View contentView = super.onCreateView(inflater, container, savedInstanceState);
         if (contentView == null) {
-            contentView = inflater.inflate(R.layout.things_fragment, container, false);
+            contentView = inflater.inflate(R.layout.thing_details_fragment, container, false);
             ButterKnife.bind(this, contentView);
-            mAdapter.setOnItemViewClickedListener(this);
-            mRecyclerView.setAdapter(mAdapter);
             mSwipeRefreshLayout.setOnRefreshListener(this);
         }
-        mThingsPresenter.subscribe(this);
+        mThingDetailsPresenter.subscribe(this);
         return contentView;
     }
 
@@ -84,12 +70,12 @@ public class ThingsFragment extends Fragment implements ThingsView,
     @Override
     public void onResume() {
         super.onResume();
-        mThingsPresenter.loadThings();
+        mThingDetailsPresenter.loadThingDetails();
     }
 
     @Override
     public void onDestroyView() {
-        mThingsPresenter.unsubscribe(this);
+        mThingDetailsPresenter.unsubscribe(this);
         super.onDestroyView();
     }
 
@@ -102,9 +88,9 @@ public class ThingsFragment extends Fragment implements ThingsView,
     }
 
     @Override
-    public void setThings(List<ThingModel> things) {
-        mAdapter.setItems(things);
-        mAdapter.notifyDataSetChanged();
+    public void setThingDetails(ThingDetailsModel thingDetails) {
+        mThingIdTextView.setText(thingDetails.thingModel.thingId);
+        mThingNameTextView.setText(thingDetails.thingModel.name);
     }
 
     @Override
@@ -119,19 +105,6 @@ public class ThingsFragment extends Fragment implements ThingsView,
 
     @Override
     public void onRefresh() {
-        mThingsPresenter.refreshThings();
-    }
-
-    @Override
-    public void onThingItemViewClicked(ThingModel thingModel) {
-        getActivity().startActivity(new Intent(getActivity(), ThingDetailsActivity.class));
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            mThingsPresenter.loadThings();
-        }
+        mThingDetailsPresenter.refreshThingDetails();
     }
 }

@@ -18,10 +18,19 @@ public abstract class RecyclerViewAdapterBase<T, V extends View & ViewWrapper.Bi
 
     @Override
     public final ViewWrapper<T, V> onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewWrapper<>(onCreateItemView(parent, viewType));
+        V itemView = onCreateItemView(parent, viewType);
+        itemView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                onItemViewClicked((V) view);
+            }
+        });
+
+        return new ViewWrapper<>(itemView);
     }
 
     protected abstract V onCreateItemView(ViewGroup parent, int viewType);
+
+    protected abstract void onItemViewClicked(V view);
 
     @Override
     public final void onBindViewHolder(ViewWrapper<T, V> viewHolder, int position) {

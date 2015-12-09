@@ -23,6 +23,7 @@ public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<
     TextView idTextView;
 
     private boolean alreadyInflated = false;
+    private ThingModel data;
 
     public ThingItemView(Context context) {
         super(context);
@@ -46,7 +47,13 @@ public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<
 
     @Override
     public void bind(ThingModel data) {
+        this.data = data;
+
         nameTextView.setText(data.name);
         idTextView.setText(data.thingId);
+    }
+
+    public ThingModel getData() {
+        return data;
     }
 }

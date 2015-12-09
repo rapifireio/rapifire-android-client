@@ -29,6 +29,9 @@
         <activity
             android:name=".view.activity.ThingsActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.activity.ThingDetailsActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

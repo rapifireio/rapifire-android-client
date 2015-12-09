@@ -14,6 +14,7 @@ import javax.inject.Inject;
 public class ThingsAdapter extends RecyclerViewAdapterBase<ThingModel, ThingItemView> {
 
     private Context context;
+    private ThingsAdapterListener listener;
 
     @Inject
     public ThingsAdapter(final Context context) {
@@ -21,8 +22,19 @@ public class ThingsAdapter extends RecyclerViewAdapterBase<ThingModel, ThingItem
         this.context = context;
     }
 
+    public void setOnItemViewClickedListener(ThingsAdapterListener listener) {
+        this.listener = listener;
+    }
+
     @Override
     protected ThingItemView onCreateItemView(ViewGroup parent, int viewType) {
         return ThingItemView.build(context);
+    }
+
+    @Override
+    protected void onItemViewClicked(ThingItemView view){
+        if(listener != null){
+            listener.onThingItemViewClicked(view.getData());
+        }
     }
 }
