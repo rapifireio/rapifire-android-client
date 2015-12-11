@@ -44,11 +44,4 @@ public class ThingDetailsActivity extends AppCompatActivity {
         thingDetailsComponent.inject(this);
         thingDetailsComponent.inject(thingDetailsFragment);
     }
-
-
-    @Override
-    public void finish() {
-        super.finish();
-        RapifireApp.get(this).releaseUserComponent();
-    }
 }
