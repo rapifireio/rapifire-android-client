@@ -1,7 +1,5 @@
 package com.rapifire.rapifireclient.domain.model;
 
-import com.rapifire.rapifireclient.data.Thing;
-
 public class ThingDetailsModel {
     public final ThingModel thingModel;
 

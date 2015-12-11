@@ -1,6 +1,8 @@
 package com.rapifire.rapifireclient.mvp.presenter;
 
 
+import android.util.Log;
+
 import com.rapifire.rapifireclient.di.ActivityScope;
 import com.rapifire.rapifireclient.domain.interactor.GetThingDetailsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.GetThingsUseCase;
@@ -30,14 +32,14 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
         this.refreshThingDetailsUseCase = refreshThingDetailsUseCase;
     }
 
-    public void loadThingDetails() {
+    public void loadThingDetails(ThingModel thingModel) {
         view.showProgress(true);
-        getThingDetailsUseCase.execute(new ThingDetailsSubscriber());
+        getThingDetailsUseCase.execute(new ThingDetailsSubscriber(), thingModel);
     }
 
-    public void refreshThingDetails() {
+    public void refreshThingDetails(ThingModel thingModel) {
         view.showRefresh(true);
-        refreshThingDetailsUseCase.execute(new ThingDetailsSubscriber());
+        refreshThingDetailsUseCase.execute(new ThingDetailsSubscriber(), thingModel);
     }
 
     @Override
@@ -64,6 +66,7 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
 
         @Override
         public void onError(Throwable throwable) {
+            Log.e("ThingDetailsPresenter", throwable.getMessage(), throwable);
             view.showProgress(false);
             view.showRefresh(false);
         }

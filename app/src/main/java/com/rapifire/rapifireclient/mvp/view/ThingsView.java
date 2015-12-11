@@ -10,7 +10,7 @@ import java.util.List;
 public interface ThingsView extends MVPView {
 
     void setThings(List<ThingModel> tweets);
-
+    void navigateToThingDetails(ThingModel thingModel);
     void showProgress(boolean show);
     void showRefresh(boolean show);
 }

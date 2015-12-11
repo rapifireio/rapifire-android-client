@@ -124,7 +124,15 @@ public class ThingsFragment extends Fragment implements ThingsView,
 
     @Override
     public void onThingItemViewClicked(ThingModel thingModel) {
-        getActivity().startActivity(new Intent(getActivity(), ThingDetailsActivity.class));
+        mThingsPresenter.onThingItemClicked(thingModel);
+    }
+
+    @Override
+    public void navigateToThingDetails(ThingModel thingModel){
+        Intent intent = new Intent(getActivity(), ThingDetailsActivity.class);
+        intent.putExtra("thing.model", thingModel);
+
+        getActivity().startActivity(intent);
     }
 
     @Override

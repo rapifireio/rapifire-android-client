@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.rapifire.rapifireclient.R;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
+import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.mvp.presenter.ThingDetailsPresenter;
 import com.rapifire.rapifireclient.mvp.view.ThingDetailsView;
 
@@ -39,9 +40,16 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Bind(R.id.thing_name_text_tiew)
     TextView mThingNameTextView;
 
+    private ThingModel thingModel;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.thingModel = (ThingModel)this.getArguments().getSerializable("thing.model");
+        if(this.thingModel == null) {
+            throw new IllegalArgumentException("ThingModel passed by 'thing.model' argument must not be null");
+        }
     }
 
     @Override
@@ -70,7 +78,7 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Override
     public void onResume() {
         super.onResume();
-        mThingDetailsPresenter.loadThingDetails();
+        mThingDetailsPresenter.loadThingDetails(thingModel);
     }
 
     @Override
@@ -105,6 +113,6 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
 
     @Override
     public void onRefresh() {
-        mThingDetailsPresenter.refreshThingDetails();
+        mThingDetailsPresenter.refreshThingDetails(thingModel);
     }
 }

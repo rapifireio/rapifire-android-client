@@ -1,11 +1,14 @@
 package com.rapifire.rapifireclient.mvp.presenter;
 
 
+import android.content.Intent;
+
 import com.rapifire.rapifireclient.di.ActivityScope;
 import com.rapifire.rapifireclient.domain.interactor.GetThingsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.RefreshThingsUseCase;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.mvp.view.ThingsView;
+import com.rapifire.rapifireclient.view.activity.ThingDetailsActivity;
 
 import java.util.List;
 
@@ -37,6 +40,10 @@ public class ThingsPresenter implements Presenter<ThingsView> {
     public void refreshThings() {
         view.showRefresh(true);
         refreshThingsUseCase.execute(new ThingsSubscriber());
+    }
+
+    public void onThingItemClicked(ThingModel thingModel) {
+        view.navigateToThingDetails(thingModel);
     }
 
     @Override

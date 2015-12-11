@@ -5,15 +5,14 @@ import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.domain.repository.ThingDetailsRepository;
 import com.rapifire.rapifireclient.domain.repository.ThingsRepository;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import rx.Observable;
 import rx.Scheduler;
+import rx.Subscriber;
 
-public class GetThingDetailsUseCase extends GetUseCase<ThingDetailsModel> {
+public class GetThingDetailsUseCase extends UseCase<ThingDetailsModel> {
 
     private final ThingDetailsRepository repository;
 
@@ -25,8 +24,14 @@ public class GetThingDetailsUseCase extends GetUseCase<ThingDetailsModel> {
         this.repository = repository;
     }
 
-    @Override
-    protected Observable<ThingDetailsModel> buildUseCaseObservable() {
-        return repository.getThingDetails(false);
+    public void execute(final Subscriber UseCaseSubscriber, ThingModel thing) {
+        this.subscription = this.buildUseCaseObservable(thing)
+                .subscribeOn(workerSheduler)
+                .observeOn(postWorkSheduler)
+                .subscribe(UseCaseSubscriber);
+    }
+
+    protected Observable<ThingDetailsModel> buildUseCaseObservable(ThingModel thing) {
+        return repository.getThingDetails(thing, false);
     }
 }

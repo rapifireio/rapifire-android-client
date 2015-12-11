@@ -1,15 +1,17 @@
 package com.rapifire.rapifireclient.data.repository;
 
-
+import com.rapifire.rapifireclient.data.mapper.ModelDataMapper;
 import com.rapifire.rapifireclient.data.Thing;
 import com.rapifire.rapifireclient.data.ThingDetails;
 import com.rapifire.rapifireclient.data.cache.MemoryCache;
+import com.rapifire.rapifireclient.data.mapper.SimpleModelDataMapper;
+import com.rapifire.rapifireclient.data.mapper.ThingDetailsModelDataMapper;
 import com.rapifire.rapifireclient.data.network.ThingsService;
 import com.rapifire.rapifireclient.di.UserScope;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
+import com.rapifire.rapifireclient.domain.repository.ThingDetailsRepository;
 import com.rapifire.rapifireclient.domain.repository.ThingsRepository;
-import com.rapifire.rapifireclient.data.mapper.ModelDataMapper;
 
 import java.util.List;
 
@@ -19,17 +21,12 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
 
-import com.rapifire.rapifireclient.data.mapper.ThingDetailsModelDataMapper;
-
-/**
- * Created by ktomek on 05.12.15.
- */
 @UserScope
-public class ThingsDataRepository implements ThingsRepository {
+public class ThingDetailsDataRepository implements ThingDetailsRepository {
 
     private final MemoryCache memoryCache;
     private final ThingsService thingsService;
-    private final ModelDataMapper<ThingModel, Thing> modelDataMapper;
+    private final SimpleModelDataMapper<ThingDetailsModel, ThingDetails> modelDataMapper;
 
     private Action1<List<ThingModel>> saveThingsAction = new Action1<List<ThingModel>>() {
         @Override
@@ -39,23 +36,22 @@ public class ThingsDataRepository implements ThingsRepository {
     };
 
     @Inject
-    public ThingsDataRepository(MemoryCache memoryCache,
-                                ThingsService tweetService,
-                                ModelDataMapper<ThingModel, Thing> modelDataMapper) {
+    public ThingDetailsDataRepository(MemoryCache memoryCache,
+                                      ThingsService tweetService,
+                                      SimpleModelDataMapper<ThingDetailsModel, ThingDetails> modelDataMapper) {
         this.memoryCache = memoryCache;
         this.thingsService = tweetService;
         this.modelDataMapper = modelDataMapper;
     }
 
-    public Observable<List<ThingModel>> getThings(boolean forceSync) {
-        Observable<List<ThingModel>> networkObservable = thingsService
-                .getThings()
-                .flatMap(modelDataMapper)
-                .doOnNext(saveThingsAction);
-        if (forceSync) {
-            return networkObservable;
-        }
-        Observable<List<ThingModel>> cacheObservable = memoryCache.getThings();
-        return Observable.concat(cacheObservable, networkObservable).first();
+    public Observable<ThingDetailsModel> getThingDetails(ThingModel thing, boolean forceSync) {
+        //l1WYo2rTa8YfkiTtusaRMM-UfO4=
+        //return thingsService.getThingDetails(thing.thingId);
+
+        Observable<ThingDetailsModel> networkObservable = thingsService
+                .getThingDetails(thing.thingId)
+                .flatMap(modelDataMapper);
+
+        return networkObservable;
     }
 }

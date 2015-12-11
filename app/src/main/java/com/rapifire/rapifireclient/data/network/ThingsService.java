@@ -1,6 +1,7 @@
 package com.rapifire.rapifireclient.data.network;
 
 import com.rapifire.rapifireclient.data.Thing;
+import com.rapifire.rapifireclient.data.ThingDetails;
 
 import java.util.List;
 
@@ -16,6 +17,6 @@ public interface ThingsService {
     @GET("things")
     Observable<List<Thing>> getThings();
 
-    @GET("thing/${thing}")
-    Observable<Thing> getThing(@Path("thing") String thing);
+    @GET("thing/{thingId}")
+    Observable<ThingDetails> getThingDetails(@Path("thingId") String thingId);
 }

@@ -1,9 +1,11 @@
 package com.rapifire.rapifireclient.di.module;
 
 import com.rapifire.rapifireclient.data.cache.MemoryCache;
+import com.rapifire.rapifireclient.data.mapper.ThingDetailsModelDataMapper;
 import com.rapifire.rapifireclient.data.network.BasicAuthInterceptor;
 import com.rapifire.rapifireclient.data.network.RapifireSession;
 import com.rapifire.rapifireclient.data.network.ThingsService;
+import com.rapifire.rapifireclient.data.repository.ThingDetailsDataRepository;
 import com.rapifire.rapifireclient.data.repository.ThingsDataRepository;
 import com.rapifire.rapifireclient.di.UserScope;
 import com.rapifire.rapifireclient.data.mapper.ThingModelDataMapper;
@@ -46,10 +48,24 @@ public class UserModule {
 
     @Provides
     @UserScope
+    public ThingDetailsModelDataMapper provideThingDetailsModelDataMapper() {
+        return new ThingDetailsModelDataMapper();
+    }
+
+    @Provides
+    @UserScope
     public ThingsDataRepository provideThingRepository(ThingsService thingsService,
                                                        MemoryCache memoryCache,
                                                        ThingModelDataMapper thingModelDataMapper) {
         return new ThingsDataRepository(memoryCache, thingsService, thingModelDataMapper);
+    }
+
+    @Provides
+    @UserScope
+    public ThingDetailsDataRepository provideThingDetailsRepository(ThingsService thingsService,
+                                                       MemoryCache memoryCache,
+                                                       ThingDetailsModelDataMapper thingDetailsModelDataMapper) {
+        return new ThingDetailsDataRepository(memoryCache, thingsService, thingDetailsModelDataMapper);
     }
 
 
