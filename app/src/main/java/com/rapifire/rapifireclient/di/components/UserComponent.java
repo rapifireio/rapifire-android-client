@@ -4,6 +4,7 @@ package com.rapifire.rapifireclient.di.components;
 import com.rapifire.rapifireclient.di.UserScope;
 import com.rapifire.rapifireclient.di.module.ThingDetailsModule;
 import com.rapifire.rapifireclient.di.module.ThingsModule;
+import com.rapifire.rapifireclient.di.module.TimeSeriesModule;
 import com.rapifire.rapifireclient.di.module.UserModule;
 
 import dagger.Subcomponent;
@@ -16,6 +17,6 @@ import dagger.Subcomponent;
 public interface UserComponent {
 
     ThingsComponent plus(ThingsModule timelineModule);
-
     ThingDetailsComponent plus(ThingDetailsModule thingDetailsModule);
+    TimeSeriesComponent plus(TimeSeriesModule timeSeriesModule);
 }

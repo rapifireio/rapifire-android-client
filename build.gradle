@@ -16,8 +16,8 @@ ext {
             dagger                : "2.0.1",
             jsr250                : "1.0",
             butterknife           : "7.0.1",
-            rxjava                : "1.0.16",
-            rxandroid             : "1.0.1",
+            rxjava                : "1.1.0",
+            rxandroid             : "1.1.0",
             rxbinding             : "0.3.0",
             okhttp                : "2.5.0",
             okhttp                : "2.5.0",
@@ -25,7 +25,8 @@ ext {
             espresso              : "2.2",
             junit                 : "4.12",
             mockito               : "1.10.8",
-            robolectric           : "3.0"
+            robolectric           : "3.0",
+            mpcharts              : "v2.1.6"
     ]
 }
 
@@ -33,10 +34,12 @@ ext {
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.0.0-alpha1'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -45,6 +48,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
+        mavenCentral()
     }
 }
 

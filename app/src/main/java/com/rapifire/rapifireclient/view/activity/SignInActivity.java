@@ -49,6 +49,7 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         signinPresenter.subscribe(this);
+        userNameEditText.setText("digitaloceanadmin");
     }
 
 

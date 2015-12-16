@@ -1,15 +1,10 @@
 package com.rapifire.rapifireclient.di.module;
 
 import com.rapifire.rapifireclient.data.repository.ThingDetailsDataRepository;
-import com.rapifire.rapifireclient.data.repository.ThingsDataRepository;
 import com.rapifire.rapifireclient.di.ActivityScope;
 import com.rapifire.rapifireclient.domain.interactor.GetThingDetailsUseCase;
-import com.rapifire.rapifireclient.domain.interactor.GetThingsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.RefreshThingDetailsUseCase;
-import com.rapifire.rapifireclient.domain.interactor.RefreshThingsUseCase;
 import com.rapifire.rapifireclient.view.activity.ThingDetailsActivity;
-import com.rapifire.rapifireclient.view.activity.ThingsActivity;
-import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
 
 import javax.inject.Named;
 
@@ -35,17 +30,19 @@ public class ThingDetailsModule {
 
     @Provides
     @ActivityScope
-    public GetThingDetailsUseCase provideGetThingDetailsUseCase(@Named("postWorkScheduler") Scheduler postScheduler,
-                                                    @Named("workerScheduler") Scheduler workerSheduler,
-                                                    ThingDetailsDataRepository thingsRepository) {
-        return new GetThingDetailsUseCase(workerSheduler,postScheduler,  thingsRepository);
+    public GetThingDetailsUseCase provideGetThingDetailsUseCase(
+            @Named("postWorkScheduler") Scheduler postScheduler,
+            @Named("workerScheduler") Scheduler workerSheduler,
+            ThingDetailsDataRepository thingsRepository) {
+        return new GetThingDetailsUseCase(workerSheduler, postScheduler, thingsRepository);
     }
 
     @Provides
     @ActivityScope
-    public RefreshThingDetailsUseCase provideRefGetThingsUseCase(@Named("postWorkScheduler") Scheduler postScheduler,
-                                                           @Named("workerScheduler") Scheduler workerSheduler,
-                                                           ThingDetailsDataRepository thingsRepository) {
-        return new RefreshThingDetailsUseCase(workerSheduler,postScheduler, thingsRepository);
+    public RefreshThingDetailsUseCase provideRefGetThingsUseCase(
+            @Named("postWorkScheduler") Scheduler postScheduler,
+            @Named("workerScheduler") Scheduler workerSheduler,
+            ThingDetailsDataRepository thingsRepository) {
+        return new RefreshThingDetailsUseCase(workerSheduler, postScheduler, thingsRepository);
     }
 }

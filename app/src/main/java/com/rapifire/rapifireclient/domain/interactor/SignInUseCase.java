@@ -31,12 +31,12 @@ public class SignInUseCase extends UseCase<User> {
         return userRepository.signInUser(username, password);
     }
 
-    public void execute(final Subscriber UseCaseSubscriber,
+    public void execute(final Subscriber useCaseSubscriber,
                         final String username,
                         final String password) {
         this.subscription = this.buildUseCaseObservable(username, password)
                 .subscribeOn(workerSheduler)
                 .observeOn(postWorkSheduler)
-                .subscribe(UseCaseSubscriber);
+                .subscribe(useCaseSubscriber);
     }
 }

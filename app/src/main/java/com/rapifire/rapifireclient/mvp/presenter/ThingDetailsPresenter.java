@@ -5,15 +5,10 @@ import android.util.Log;
 
 import com.rapifire.rapifireclient.di.ActivityScope;
 import com.rapifire.rapifireclient.domain.interactor.GetThingDetailsUseCase;
-import com.rapifire.rapifireclient.domain.interactor.GetThingsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.RefreshThingDetailsUseCase;
-import com.rapifire.rapifireclient.domain.interactor.RefreshThingsUseCase;
-import com.rapifire.rapifireclient.domain.model.ThingModel;
-import com.rapifire.rapifireclient.mvp.view.ThingsView;
-import com.rapifire.rapifireclient.mvp.view.ThingDetailsView;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
-
-import java.util.List;
+import com.rapifire.rapifireclient.domain.model.ThingModel;
+import com.rapifire.rapifireclient.mvp.view.ThingDetailsView;
 
 import javax.inject.Inject;
 
@@ -27,7 +22,8 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
     private ThingDetailsView view;
 
     @Inject
-    public ThingDetailsPresenter(GetThingDetailsUseCase getThingDetailsUseCase, RefreshThingDetailsUseCase refreshThingDetailsUseCase) {
+    public ThingDetailsPresenter(GetThingDetailsUseCase getThingDetailsUseCase,
+                                 RefreshThingDetailsUseCase refreshThingDetailsUseCase) {
         this.getThingDetailsUseCase = getThingDetailsUseCase;
         this.refreshThingDetailsUseCase = refreshThingDetailsUseCase;
     }

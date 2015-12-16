@@ -6,8 +6,6 @@ import com.rapifire.rapifireclient.domain.model.ThingModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Singleton;
-
 import rx.Observable;
 
 /**

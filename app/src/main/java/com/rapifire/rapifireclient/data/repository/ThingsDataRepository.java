@@ -4,20 +4,18 @@ package com.rapifire.rapifireclient.data.repository;
 import com.rapifire.rapifireclient.data.Thing;
 import com.rapifire.rapifireclient.data.ThingDetails;
 import com.rapifire.rapifireclient.data.cache.MemoryCache;
+import com.rapifire.rapifireclient.data.mapper.ModelDataMapper;
 import com.rapifire.rapifireclient.data.network.ThingsService;
 import com.rapifire.rapifireclient.di.UserScope;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.domain.repository.ThingsRepository;
-import com.rapifire.rapifireclient.data.mapper.ModelDataMapper;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
 
 import com.rapifire.rapifireclient.data.mapper.ThingDetailsModelDataMapper;
 
@@ -30,13 +28,6 @@ public class ThingsDataRepository implements ThingsRepository {
     private final MemoryCache memoryCache;
     private final ThingsService thingsService;
     private final ModelDataMapper<ThingModel, Thing> modelDataMapper;
-
-    private Action1<List<ThingModel>> saveThingsAction = new Action1<List<ThingModel>>() {
-        @Override
-        public void call(List<ThingModel> tweets) {
-            memoryCache.saveThings(tweets);
-        }
-    };
 
     @Inject
     public ThingsDataRepository(MemoryCache memoryCache,
@@ -51,11 +42,26 @@ public class ThingsDataRepository implements ThingsRepository {
         Observable<List<ThingModel>> networkObservable = thingsService
                 .getThings()
                 .flatMap(modelDataMapper)
-                .doOnNext(saveThingsAction);
+                .doOnNext(thingModels -> memoryCache.saveThings(thingModels));
         if (forceSync) {
             return networkObservable;
         }
         Observable<List<ThingModel>> cacheObservable = memoryCache.getThings();
         return Observable.concat(cacheObservable, networkObservable).first();
+    }
+
+    public Observable<ThingDetailsModel> getThingDetails(boolean forceSync) {
+        return Observable.create(subscriber -> {
+                    try {
+                        if (!subscriber.isUnsubscribed()) {
+                            ThingDetailsModel thingDetailsModel = new ThingDetailsModel();
+                            subscriber.onNext(thingDetailsModel);
+                            subscriber.onCompleted();
+                        }
+                    } catch (Exception e) {
+                        subscriber.onError(e);
+                    }
+                }
+        );
     }
 }

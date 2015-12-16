@@ -19,8 +19,8 @@ public class RefreshThingsUseCase extends GetUseCase<List<ThingModel>> {
     private final ThingsRepository repository;
 
     @Inject
-    public RefreshThingsUseCase(@Named("workerSheduler") Scheduler workerSheduler,
-                                @Named("postWorkSheduler") Scheduler postWorkSheduler,
+    public RefreshThingsUseCase(@Named("workerScheduler") Scheduler workerSheduler,
+                                @Named("postWorkScheduler") Scheduler postWorkSheduler,
                                 ThingsRepository repository) {
         super(workerSheduler, postWorkSheduler);
         this.repository = repository;

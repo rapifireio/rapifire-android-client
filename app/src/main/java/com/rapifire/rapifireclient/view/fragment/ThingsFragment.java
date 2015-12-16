@@ -1,6 +1,5 @@
 package com.rapifire.rapifireclient.view.fragment;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +17,7 @@ import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.mvp.presenter.ThingsPresenter;
 import com.rapifire.rapifireclient.mvp.view.ThingsView;
 import com.rapifire.rapifireclient.view.activity.ThingDetailsActivity;
-import com.rapifire.rapifireclient.view.activity.ThingsActivity;
+import com.rapifire.rapifireclient.view.activity.TimeSeriesActivity;
 import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
 import com.rapifire.rapifireclient.view.adapter.ThingsAdapterListener;
 
@@ -133,13 +132,5 @@ public class ThingsFragment extends Fragment implements ThingsView,
         intent.putExtra("thing.model", thingModel);
 
         getActivity().startActivity(intent);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            mThingsPresenter.loadThings();
-        }
     }
 }

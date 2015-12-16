@@ -18,8 +18,7 @@ public class BasicAuthInterceptor implements Interceptor {
     public BasicAuthInterceptor(final String username, final String password) {
         if (username != null && password != null) {
             String credentials = username + ":" + password;
-            basic =
-                    "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+            basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
         } else {
             throw new IllegalArgumentException("Username and password can not be  null");
         }

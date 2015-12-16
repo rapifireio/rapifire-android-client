@@ -32,8 +32,8 @@ public class ThingsAdapter extends RecyclerViewAdapterBase<ThingModel, ThingItem
     }
 
     @Override
-    protected void onItemViewClicked(ThingItemView view){
-        if(listener != null){
+    protected void onItemViewClicked(ThingItemView view) {
+        if (listener != null) {
             listener.onThingItemViewClicked(view.getData());
         }
     }

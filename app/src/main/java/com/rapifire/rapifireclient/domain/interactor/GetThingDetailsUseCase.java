@@ -3,7 +3,6 @@ package com.rapifire.rapifireclient.domain.interactor;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.domain.repository.ThingDetailsRepository;
-import com.rapifire.rapifireclient.domain.repository.ThingsRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;

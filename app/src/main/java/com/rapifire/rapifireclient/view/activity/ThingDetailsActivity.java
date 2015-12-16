@@ -5,14 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.rapifire.rapifireclient.R;
 import com.rapifire.rapifireclient.RapifireApp;
-import com.rapifire.rapifireclient.data.ThingDetails;
 import com.rapifire.rapifireclient.di.components.ThingDetailsComponent;
-import com.rapifire.rapifireclient.di.components.ThingsComponent;
 import com.rapifire.rapifireclient.di.module.ThingDetailsModule;
-import com.rapifire.rapifireclient.di.module.ThingsModule;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.view.fragment.ThingDetailsFragment;
-import com.rapifire.rapifireclient.view.fragment.ThingsFragment;
 
 public class ThingDetailsActivity extends AppCompatActivity {
 

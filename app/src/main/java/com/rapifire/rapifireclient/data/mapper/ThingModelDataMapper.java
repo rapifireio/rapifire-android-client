@@ -3,7 +3,6 @@ package com.rapifire.rapifireclient.data.mapper;
 import com.rapifire.rapifireclient.data.Thing;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 

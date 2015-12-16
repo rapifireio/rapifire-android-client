@@ -32,6 +32,10 @@
         <activity
             android:name=".view.activity.ThingDetailsActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".view.activity.TimeSeriesActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

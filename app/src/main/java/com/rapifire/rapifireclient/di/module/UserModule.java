@@ -2,13 +2,16 @@ package com.rapifire.rapifireclient.di.module;
 
 import com.rapifire.rapifireclient.data.cache.MemoryCache;
 import com.rapifire.rapifireclient.data.mapper.ThingDetailsModelDataMapper;
+import com.rapifire.rapifireclient.data.mapper.TimeSeriesModelDataMapper;
 import com.rapifire.rapifireclient.data.network.BasicAuthInterceptor;
 import com.rapifire.rapifireclient.data.network.RapifireSession;
 import com.rapifire.rapifireclient.data.network.ThingsService;
 import com.rapifire.rapifireclient.data.repository.ThingDetailsDataRepository;
 import com.rapifire.rapifireclient.data.repository.ThingsDataRepository;
+import com.rapifire.rapifireclient.data.repository.TimeSeriesDataRepository;
 import com.rapifire.rapifireclient.di.UserScope;
 import com.rapifire.rapifireclient.data.mapper.ThingModelDataMapper;
+import com.rapifire.rapifireclient.domain.repository.TimeSeriesRepository;
 import com.squareup.okhttp.OkHttpClient;
 
 import dagger.Module;
@@ -66,6 +69,13 @@ public class UserModule {
                                                        MemoryCache memoryCache,
                                                        ThingDetailsModelDataMapper thingDetailsModelDataMapper) {
         return new ThingDetailsDataRepository(memoryCache, thingsService, thingDetailsModelDataMapper);
+    }
+
+    @Provides
+    @UserScope
+    public TimeSeriesRepository provideTimeSeriesRepository(ThingsService thingsService,
+                                                       TimeSeriesModelDataMapper timeSeriesModelDataMapper) {
+        return new TimeSeriesDataRepository(thingsService, timeSeriesModelDataMapper);
     }
 
 

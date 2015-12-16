@@ -3,7 +3,6 @@ package com.rapifire.rapifireclient.domain.interactor;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.domain.repository.ThingDetailsRepository;
-import com.rapifire.rapifireclient.domain.repository.ThingsRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,10 +16,10 @@ public class RefreshThingDetailsUseCase extends UseCase<ThingDetailsModel> {
     private final ThingDetailsRepository repository;
 
     @Inject
-    public RefreshThingDetailsUseCase(@Named("workerSheduler") Scheduler workerSheduler,
-                                      @Named("postWorkSheduler") Scheduler postWorkSheduler,
+    public RefreshThingDetailsUseCase(@Named("workerScheduler") Scheduler workerScheduler,
+                                      @Named("postWorkScheduler") Scheduler postWorkScheduler,
                                       ThingDetailsRepository repository) {
-        super(workerSheduler, postWorkSheduler);
+        super(workerScheduler, postWorkScheduler);
         this.repository = repository;
     }
 

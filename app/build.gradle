@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 apply from: '../config/quality.gradle'
 
 Properties properties = new Properties()
@@ -29,6 +30,12 @@ android {
         debug {
             testCoverageEnabled true
         }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -62,6 +69,9 @@ dependencies {
     compile "com.squareup.retrofit:converter-gson:${lib.retrofit}"
     compile "com.squareup.retrofit:adapter-rxjava:${lib.retrofit}"
 
+    //charts
+    compile "com.github.PhilJay:MPAndroidChart:${lib.mpcharts}"
+
     //for ui test run on device or emulator
 //    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2"
 //    androidTestCompile "com.android.support:support-annotations:${lib.supportVersion}"
@@ -73,3 +83,10 @@ dependencies {
     testCompile "org.mockito:mockito-core:${lib.mockito}"
 }
 
+retrolambda {
+    jdk JAVA8_HOME
+    oldJdk JAVA7_HOME
+    javaVersion JavaVersion.VERSION_1_7
+    defaultMethods false
+    incremental true
+}

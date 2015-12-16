@@ -15,10 +15,10 @@ public abstract class GetUseCase<T> extends UseCase<T> {
 
     protected abstract Observable<T> buildUseCaseObservable();
 
-    public void execute(Subscriber UseCaseSubscriber) {
+    public void execute(Subscriber useCaseSubscriber) {
         this.subscription = this.buildUseCaseObservable()
                 .subscribeOn(workerSheduler)
                 .observeOn(postWorkSheduler)
-                .subscribe(UseCaseSubscriber);
+                .subscribe(useCaseSubscriber);
     }
 }
