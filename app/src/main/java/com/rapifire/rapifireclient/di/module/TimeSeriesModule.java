@@ -19,10 +19,12 @@ public class TimeSeriesModule {
 
     private final TimeSeriesActivity timeSeriesActivity;
     private final String thingId;
+    private String key;
 
-    public TimeSeriesModule(TimeSeriesActivity timeSeriesActivity, final String thingId) {
+    public TimeSeriesModule(TimeSeriesActivity timeSeriesActivity, final String thingId, final String key) {
         this.timeSeriesActivity = timeSeriesActivity;
         this.thingId = thingId;
+        this.key = key;
     }
 
     @Provides
@@ -37,6 +39,6 @@ public class TimeSeriesModule {
     public TimeSeriesUseCase provideTimeSeriesUseCase(@Named("postWorkScheduler") Scheduler postScheduler,
                                                       @Named("workerScheduler") Scheduler workerSheduler,
                                                       TimeSeriesRepository timeSeriesRepository) {
-        return new TimeSeriesUseCase(workerSheduler, postScheduler, timeSeriesRepository, thingId);
+        return new TimeSeriesUseCase(workerSheduler, postScheduler, timeSeriesRepository, thingId, key);
     }
 }

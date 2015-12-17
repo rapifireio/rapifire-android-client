@@ -11,5 +11,5 @@ import rx.Observable;
  */
 public interface TimeSeriesRepository {
 
-    Observable<List<TimeSeriesModel>> getTimeSeries(String thingId, long lastMillis);
+    Observable<List<TimeSeriesModel>> getTimeSeries(String thingId, String key, long lastMillis);
 }

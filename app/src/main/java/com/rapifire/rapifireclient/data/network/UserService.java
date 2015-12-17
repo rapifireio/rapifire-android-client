@@ -10,6 +10,6 @@ import rx.Observable;
  */
 public interface UserService {
 
-    @GET("/api/v1/user")
+    @GET("/api/v1/myself")
     Observable<User> getUser();
 }

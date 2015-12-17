@@ -25,7 +25,7 @@ import rx.schedulers.Schedulers;
 public class AppModule {
 
     //change it to final field and pass by constructor
-    public static final String BASE_URL = "http://rapifire.com/api/v1/";
+    public static final String BASE_URL = "http://api.rapifire.com/api/v1/";
 
     private final RapifireApp application;
 

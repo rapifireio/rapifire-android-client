@@ -24,9 +24,9 @@ public class TimeSeriesDataRepository implements TimeSeriesRepository {
     }
 
     @Override
-    public Observable<List<TimeSeriesModel>> getTimeSeries(String thingId, long lastMillis) {
+    public Observable<List<TimeSeriesModel>> getTimeSeries(String thingId, String key, long lastMillis) {
         return thingsService
-                .getTimeSeries(thingId, lastMillis)
+                .getTimeSeries(thingId, key, lastMillis)
                 .flatMap(modelDataMapper);
     }
 }
