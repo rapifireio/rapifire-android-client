@@ -5,6 +5,8 @@ import com.rapifire.rapifireclient.di.ActivityScope;
 import com.rapifire.rapifireclient.domain.interactor.GetThingDetailsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.RefreshThingDetailsUseCase;
 import com.rapifire.rapifireclient.view.activity.ThingDetailsActivity;
+import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapter;
+import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
 
 import javax.inject.Named;
 
@@ -27,7 +29,11 @@ public class ThingDetailsModule {
         return thingDetailsActivity;
     }
 
-
+    @Provides
+    @ActivityScope
+    public ThingLatestDataAdapter provideThingLatestDataAdapter() {
+        return new ThingLatestDataAdapter(thingDetailsActivity);
+    }
     @Provides
     @ActivityScope
     public GetThingDetailsUseCase provideGetThingDetailsUseCase(

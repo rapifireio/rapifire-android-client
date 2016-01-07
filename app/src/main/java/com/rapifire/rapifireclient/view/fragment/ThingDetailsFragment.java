@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.mvp.presenter.ThingDetailsPresenter;
 import com.rapifire.rapifireclient.mvp.view.ThingDetailsView;
+import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapter;
+import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
 
 import javax.inject.Inject;
 
@@ -29,6 +32,8 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
 
     @Inject
     ThingDetailsPresenter mThingDetailsPresenter;
+    @Inject
+    ThingLatestDataAdapter mAdapter;
 
     @Bind(R.id.progress_bar)
     ProgressBar mProgressBar;
@@ -37,8 +42,16 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
 
     @Bind(R.id.thing_id_text_view)
     TextView mThingIdTextView;
-    @Bind(R.id.thing_name_text_tiew)
+    @Bind(R.id.thing_name_text_view)
     TextView mThingNameTextView;
+    @Bind(R.id.thing_product_name_text_view)
+    TextView mThingProductNameTextView;
+    @Bind(R.id.thing_online_text_view)
+    TextView mThingOnlineTextView;
+    @Bind(R.id.thing_last_publish_text_view)
+    TextView mThingLastPublishTextView;
+    @Bind(R.id.latest_data_recycler_view)
+    RecyclerView mLatestDataRecyclerView;
 
     private ThingModel thingModel;
 
@@ -60,6 +73,7 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
             contentView = inflater.inflate(R.layout.thing_details_fragment, container, false);
             ButterKnife.bind(this, contentView);
             mSwipeRefreshLayout.setOnRefreshListener(this);
+            mLatestDataRecyclerView.setAdapter(mAdapter);
         }
         mThingDetailsPresenter.subscribe(this);
         return contentView;
@@ -99,6 +113,15 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     public void setThingDetails(ThingDetailsModel thingDetails) {
         mThingIdTextView.setText(thingDetails.thingModel.thingId);
         mThingNameTextView.setText(thingDetails.thingModel.name);
+        mThingProductNameTextView.setText(thingDetails.getProductName());
+        mThingOnlineTextView.setText(thingDetails.isOnline() ? "true" : "false");
+        if(thingDetails.getMillisSinceLastPublish() == null) {
+            mThingLastPublishTextView.setText("never");
+        } else {
+            mThingLastPublishTextView.setText(String.format("%s milliseconds ago", thingDetails.getMillisSinceLastPublish()));
+        }
+
+        mAdapter.setItems(thingDetails.getLatestData().getLatestData());
     }
 
     @Override
