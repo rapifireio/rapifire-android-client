@@ -55,7 +55,7 @@ public class ThingLatestDataItemView extends RelativeLayout implements ViewWrapp
         valueTextView.setText(data.getValueAsString());
     }
 
-    public LatestTimeSeriesModel getLatestTimeSeriesModel() {
+    public LatestTimeSeriesModel getData() {
         return data;
     }
 }

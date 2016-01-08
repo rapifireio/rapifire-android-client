@@ -2,6 +2,7 @@ package com.rapifire.rapifireclient.view.fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,11 +14,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.rapifire.rapifireclient.R;
+import com.rapifire.rapifireclient.domain.model.LatestTimeSeriesModel;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.mvp.presenter.ThingDetailsPresenter;
 import com.rapifire.rapifireclient.mvp.view.ThingDetailsView;
+import com.rapifire.rapifireclient.view.activity.ThingDetailsActivity;
+import com.rapifire.rapifireclient.view.activity.TimeSeriesActivity;
 import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapter;
+import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapterListener;
 import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
 
 import javax.inject.Inject;
@@ -28,7 +33,7 @@ import butterknife.ButterKnife;
 /**
  * Created by witek on 08.12.15.
  */
-public class ThingDetailsFragment extends Fragment implements ThingDetailsView, SwipeRefreshLayout.OnRefreshListener {
+public class ThingDetailsFragment extends Fragment implements ThingDetailsView, SwipeRefreshLayout.OnRefreshListener, ThingLatestDataAdapterListener {
 
     @Inject
     ThingDetailsPresenter mThingDetailsPresenter;
@@ -73,7 +78,9 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
             contentView = inflater.inflate(R.layout.thing_details_fragment, container, false);
             ButterKnife.bind(this, contentView);
             mSwipeRefreshLayout.setOnRefreshListener(this);
+            mAdapter.setOnItemViewClickedListener(this);
             mLatestDataRecyclerView.setAdapter(mAdapter);
+
         }
         mThingDetailsPresenter.subscribe(this);
         return contentView;
@@ -137,5 +144,19 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Override
     public void onRefresh() {
         mThingDetailsPresenter.refreshThingDetails(thingModel);
+    }
+
+    @Override
+    public void onThingLatestDataItemViewClicked(LatestTimeSeriesModel latestTimeSeriesModel) {
+        mThingDetailsPresenter.onThingLatestDataItemClicked(latestTimeSeriesModel);
+    }
+
+    @Override
+    public void navigateToTimeSeries(String seriesName) {
+        Intent intent = new Intent(getActivity(), TimeSeriesActivity.class);
+        intent.putExtra(TimeSeriesActivity.ARG_THING_ID, thingModel.thingId);
+        intent.putExtra(TimeSeriesActivity.ARG_THING_TIMESEIRES_KEY, seriesName);
+
+        getActivity().startActivity(intent);
     }
 }

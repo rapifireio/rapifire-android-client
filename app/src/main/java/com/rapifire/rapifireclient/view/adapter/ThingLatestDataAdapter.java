@@ -13,7 +13,7 @@ import javax.inject.Inject;
 public class ThingLatestDataAdapter extends RecyclerViewAdapterBase<LatestTimeSeriesModel, ThingLatestDataItemView> {
 
     private Context context;
-    private ThingsAdapterListener listener;
+    private ThingLatestDataAdapterListener listener;
 
     @Inject
     public ThingLatestDataAdapter(final Context context) {
@@ -21,7 +21,7 @@ public class ThingLatestDataAdapter extends RecyclerViewAdapterBase<LatestTimeSe
         this.context = context;
     }
 
-    public void setOnItemViewClickedListener(ThingsAdapterListener listener) {
+    public void setOnItemViewClickedListener(ThingLatestDataAdapterListener listener) {
         this.listener = listener;
     }
 
@@ -32,6 +32,8 @@ public class ThingLatestDataAdapter extends RecyclerViewAdapterBase<LatestTimeSe
 
     @Override
     protected void onItemViewClicked(ThingLatestDataItemView view) {
-
+        if (listener != null) {
+            listener.onThingLatestDataItemViewClicked(view.getData());
+        }
     }
 }

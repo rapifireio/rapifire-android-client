@@ -15,13 +15,13 @@ import com.rapifire.rapifireclient.view.fragment.TimeSeriesFragment;
 public class TimeSeriesActivity extends AppCompatActivity {
 
     public static final String ARG_THING_ID = "ARG_THING_ID";
-    public static final String ARG_THING_KEY = "ARG_THING_KEY";
+    public static final String ARG_THING_TIMESEIRES_KEY = "ARG_THING_TIMESERIES_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final String thingId = getIntent().getStringExtra(ARG_THING_ID);
-        final String key = getIntent().getStringExtra(ARG_THING_KEY);
+        final String key = getIntent().getStringExtra(ARG_THING_TIMESEIRES_KEY);
         TimeSeriesFragment fragment = new TimeSeriesFragment();
         setupActivityComponent(fragment, thingId, key);
         setContentView(R.layout.activity_things);

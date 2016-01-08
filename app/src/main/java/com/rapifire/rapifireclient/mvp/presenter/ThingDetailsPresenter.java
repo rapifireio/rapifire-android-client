@@ -6,6 +6,7 @@ import android.util.Log;
 import com.rapifire.rapifireclient.di.ActivityScope;
 import com.rapifire.rapifireclient.domain.interactor.GetThingDetailsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.RefreshThingDetailsUseCase;
+import com.rapifire.rapifireclient.domain.model.LatestTimeSeriesModel;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.mvp.view.ThingDetailsView;
@@ -36,6 +37,10 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
     public void refreshThingDetails(ThingModel thingModel) {
         view.showRefresh(true);
         refreshThingDetailsUseCase.execute(new ThingDetailsSubscriber(), thingModel);
+    }
+
+    public void onThingLatestDataItemClicked(LatestTimeSeriesModel latestTimeSeriesModel) {
+        view.navigateToTimeSeries(latestTimeSeriesModel.getName());
     }
 
     @Override
