@@ -15,10 +15,10 @@ import butterknife.ButterKnife;
 
 public class TimeSeriesView extends RelativeLayout implements ViewWrapper.Binder<TimeSeriesModel> {
 
-    @Bind(R.id.name_text_view)
+    @Bind(R.id.thing_name_text_view)
     TextView nameTextView;
 
-    @Bind(R.id.id_text_view)
+    @Bind(R.id.thing_id_text_view)
     TextView idTextView;
 
     private boolean alreadyInflated = false;

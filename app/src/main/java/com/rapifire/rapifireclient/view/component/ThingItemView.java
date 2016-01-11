@@ -16,10 +16,10 @@ import butterknife.ButterKnife;
  */
 public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<ThingModel> {
 
-    @Bind(R.id.name_text_view)
+    @Bind(R.id.thing_name_text_view)
     TextView nameTextView;
 
-    @Bind(R.id.id_text_view)
+    @Bind(R.id.thing_id_text_view)
     TextView idTextView;
 
     private boolean alreadyInflated = false;
