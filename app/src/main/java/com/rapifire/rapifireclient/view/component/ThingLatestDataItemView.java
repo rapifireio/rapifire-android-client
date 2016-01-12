@@ -1,10 +1,12 @@
 package com.rapifire.rapifireclient.view.component;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rapifire.rapifireclient.R;
+import com.rapifire.rapifireclient.domain.interactor.TimeSeriesType;
 import com.rapifire.rapifireclient.domain.model.LatestTimeSeriesModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.view.adapter.ViewWrapper;
@@ -22,6 +24,12 @@ public class ThingLatestDataItemView extends RelativeLayout implements ViewWrapp
 
     @Bind(R.id.series_value_text_view)
     TextView valueTextView;
+
+    @Bind(R.id.series_line_chart_icon)
+    TextView lineChartIcon;
+
+    @Bind(R.id.series_pie_chart_icon)
+    TextView pieChartIcon;
 
     private boolean alreadyInflated = false;
     private LatestTimeSeriesModel data;
@@ -49,10 +57,22 @@ public class ThingLatestDataItemView extends RelativeLayout implements ViewWrapp
     @Override
     public void bind(LatestTimeSeriesModel data) {
         this.data = data;
+        lineChartIcon.setVisibility(View.GONE);
+        pieChartIcon.setVisibility(View.GONE);
 
         nameTextView.setText(data.getName());
         timestampTextView.setText(String.valueOf(data.getDataTimeMillis()));
         valueTextView.setText(data.getValueAsString());
+
+        switch(data.getTimeSeriesModel().getTimeSeriesType()) {
+            case STRING:
+                pieChartIcon.setVisibility(View.VISIBLE);
+                break;
+            case DOUBLE:
+            default:
+                lineChartIcon.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     public LatestTimeSeriesModel getData() {

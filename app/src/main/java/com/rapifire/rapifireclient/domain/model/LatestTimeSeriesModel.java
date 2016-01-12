@@ -1,5 +1,7 @@
 package com.rapifire.rapifireclient.domain.model;
 
+import com.rapifire.rapifireclient.domain.interactor.TimeSeriesType;
+
 /**
  * Created by witek on 07.01.16.
  */
@@ -30,5 +32,9 @@ public class LatestTimeSeriesModel {
         }
 
         throw new RuntimeException("This is bad: no value available");
+    }
+
+    public TimeSeriesModel getTimeSeriesModel() {
+        return this.timeSeriesModel;
     }
 }

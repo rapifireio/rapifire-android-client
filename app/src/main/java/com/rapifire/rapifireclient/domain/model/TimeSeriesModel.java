@@ -1,5 +1,7 @@
 package com.rapifire.rapifireclient.domain.model;
 
+import com.rapifire.rapifireclient.domain.interactor.TimeSeriesType;
+
 /**
  * Created by ktomek on 08.12.15.
  */
@@ -27,5 +29,17 @@ public class TimeSeriesModel {
 
     public String getStringValue() {
         return stringValue;
+    }
+
+    public TimeSeriesType getTimeSeriesType() {
+        if(stringValue != null) {
+            return TimeSeriesType.STRING;
+        }
+
+        if(doubleValue != null) {
+            return TimeSeriesType.DOUBLE;
+        }
+
+        return TimeSeriesType.NONE;
     }
 }

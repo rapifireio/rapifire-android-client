@@ -3,6 +3,7 @@ package com.rapifire.rapifireclient.view.fragment;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -45,20 +46,27 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Bind(R.id.swipe_to_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    @Bind(R.id.thing_id_text_view)
-    TextView mThingIdTextView;
     @Bind(R.id.thing_name_text_view)
     TextView mThingNameTextView;
-    @Bind(R.id.thing_product_name_text_view)
-    TextView mThingProductNameTextView;
-    @Bind(R.id.thing_online_text_view)
-    TextView mThingOnlineTextView;
+    @Bind(R.id.thing_id_text_view)
+    TextView mThingIdTextView;
+
+    @Bind(R.id.thing_status_fontawsomeview)
+    TextView mThingOnlineIcon;
+    @Bind(R.id.thing_status_text_view)
+    TextView mThingStatusTextView;
     @Bind(R.id.thing_last_publish_text_view)
     TextView mThingLastPublishTextView;
+
+    @Bind(R.id.thing_product_name_text_view)
+    TextView mThingProductNameTextView;
+
     @Bind(R.id.latest_data_recycler_view)
     RecyclerView mLatestDataRecyclerView;
 
     private ThingModel thingModel;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,11 +129,19 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
         mThingIdTextView.setText(thingDetails.thingModel.thingId);
         mThingNameTextView.setText(thingDetails.thingModel.name);
         mThingProductNameTextView.setText(thingDetails.getProductName());
-        mThingOnlineTextView.setText(thingDetails.isOnline() ? "true" : "false");
+
+        if(thingDetails.isOnline()) {
+            mThingOnlineIcon.setTextColor(Color.GREEN);
+            mThingStatusTextView.setText("online");
+        }else{
+            mThingOnlineIcon.setTextColor(Color.GRAY);
+            mThingStatusTextView.setText("offline");
+        }
+
         if(thingDetails.getMillisSinceLastPublish() == null) {
             mThingLastPublishTextView.setText("never");
         } else {
-            mThingLastPublishTextView.setText(String.format("%s milliseconds ago", thingDetails.getMillisSinceLastPublish()));
+            mThingLastPublishTextView.setText(String.format("%s ms ago", thingDetails.getMillisSinceLastPublish()));
         }
 
         mAdapter.setItems(thingDetails.getLatestData().getLatestData());

@@ -15,4 +15,10 @@
     </string>
     <string name="warning">Warning</string>
     <string name="profile_image_content_description">image</string>
+    <string name="fa_bullseye">&#xf140;</string>
+    <string name="fa_circle_thin">&#xf1db;</string>
+    <string name="fa_chevron_down">&#xf078;</string>
+    <string name="fa_chevron_up">&#xf077;</string>
+    <string name="fa_line_chart">&#xf201;</string>
+    <string name="fa_pie_chart">&#xf200;</string>
 </resources>
