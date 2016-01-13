@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:fitsSystemWindows="true"
     tools:context=".view.activity.ThingsActivity"
-    android:background="#CCE2FF">
+    android:background="#CCE2FF"
+    android:padding="10dp">
 
     <FrameLayout
         android:layout_width="match_parent"

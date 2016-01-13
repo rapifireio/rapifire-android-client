@@ -3,6 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorBackground">#CCE2FF</color>
+    <color name="colorBorder">#D4D4D5</color>
+    <color name="buttonNormalColor">#2185D0</color>
+    <color name="buttonSelectedColor">#1f76b7</color>
 
     <color name="white">#FFFFFF</color>
     <color name="yellow">#FFFF00</color>
