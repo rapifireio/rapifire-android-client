@@ -1,6 +1,10 @@
 package com.rapifire.rapifireclient.view.component;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,6 +19,9 @@ import butterknife.ButterKnife;
  * Created by ktomek on 05.12.15.
  */
 public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<ThingModel> {
+
+    @Bind(R.id.profile_image_view)
+    RandIcon idRandIcon;
 
     @Bind(R.id.thing_name_text_view)
     TextView nameTextView;
@@ -51,6 +58,7 @@ public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<
 
         nameTextView.setText(data.name);
         idTextView.setText(data.thingId);
+        idRandIcon.setText(data.name);
     }
 
     public ThingModel getData() {

@@ -25,6 +25,7 @@ import com.rapifire.rapifireclient.view.activity.TimeSeriesActivity;
 import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapter;
 import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapterListener;
 import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
+import com.rapifire.rapifireclient.view.component.RandIcon;
 
 import javax.inject.Inject;
 
@@ -46,6 +47,9 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Bind(R.id.swipe_to_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+
+    @Bind(R.id.profile_image_view)
+    RandIcon mThingRandIcon;
     @Bind(R.id.thing_name_text_view)
     TextView mThingNameTextView;
     @Bind(R.id.thing_id_text_view)
@@ -89,6 +93,7 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
             mAdapter.setOnItemViewClickedListener(this);
             mLatestDataRecyclerView.setAdapter(mAdapter);
 
+            updateView(this.thingModel);
         }
         mThingDetailsPresenter.subscribe(this);
         return contentView;
@@ -126,6 +131,7 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
 
     @Override
     public void setThingDetails(ThingDetailsModel thingDetails) {
+        mThingRandIcon.setText(thingDetails.thingModel.name);
         mThingIdTextView.setText(thingDetails.thingModel.thingId);
         mThingNameTextView.setText(thingDetails.thingModel.name);
         mThingProductNameTextView.setText(thingDetails.getProductName());
@@ -174,5 +180,23 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
         intent.putExtra(TimeSeriesActivity.ARG_THING_TIMESEIRES_KEY, seriesName);
 
         getActivity().startActivity(intent);
+    }
+
+    private void updateView(ThingModel thingModel) {
+        if(thingModel == null) {
+            return;
+        }
+
+        if(mThingRandIcon != null) {
+            mThingRandIcon.setText(thingModel.name);
+        }
+
+        if(mThingNameTextView != null) {
+            mThingNameTextView.setText(thingModel.name);
+        }
+
+        if(mThingIdTextView != null) {
+            mThingIdTextView.setText(thingModel.thingId);
+        }
     }
 }

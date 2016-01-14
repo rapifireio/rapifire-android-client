@@ -2,8 +2,11 @@ package com.rapifire.rapifireclient.view.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +18,7 @@ import com.rapifire.rapifireclient.di.components.SignInActivityComponent;
 import com.rapifire.rapifireclient.di.module.SignInActivityModule;
 import com.rapifire.rapifireclient.mvp.presenter.SignInPresenter;
 import com.rapifire.rapifireclient.mvp.view.SigninView;
+import com.rapifire.rapifireclient.view.component.RandIcon;
 
 import javax.inject.Inject;
 
@@ -32,6 +36,8 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
 
     @Bind(R.id.username_edit_text)
     EditText userNameEditText;
+    @Bind(R.id.profile_image_view)
+    RandIcon userNameRandIcon;
 
     @Bind(R.id.password_edit_text)
     EditText passwordEditText;
@@ -50,6 +56,27 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
         ButterKnife.bind(this);
         signinPresenter.subscribe(this);
         userNameEditText.setText("digitaloceanadmin");
+        userNameEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if (s.length() != 0) {
+                    userNameRandIcon.setText(userNameEditText.getText().toString());
+                }
+            }
+        });
+
+        userNameRandIcon.setText("digitaloceanadmin");
     }
 
 

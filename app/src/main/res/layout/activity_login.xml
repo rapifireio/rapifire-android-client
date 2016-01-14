@@ -34,20 +34,38 @@
             android:padding="16dp"
             android:background="@drawable/card_bg">
 
-            <android.support.design.widget.TextInputLayout
+            <RelativeLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <AutoCompleteTextView
-                    android:id="@+id/username_edit_text"
+                <com.rapifire.rapifireclient.view.component.RandIcon
+                    android:id="@+id/profile_image_view"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_alignParentRight="true"/>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_login"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:layout_toLeftOf="@+id/profile_image_view">
 
-            </android.support.design.widget.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/username_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/prompt_login"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+            </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -77,7 +95,6 @@
                 android:textColor="@color/white"
                 android:background="@drawable/login_button_selector"
                 android:layout_gravity="center_horizontal" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -21,12 +21,10 @@
                 android:padding="16dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <com.rapifire.rapifireclient.view.component.RandIcon
                     android:id="@+id/profile_image_view"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:contentDescription="@string/profile_image_content_description"
-                    android:background="@android:drawable/ic_menu_camera"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="16dp"/>
 
