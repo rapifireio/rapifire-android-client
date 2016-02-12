@@ -2,9 +2,9 @@
     <string name="app_name">rapifire-android-client</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="prompt_login">Login</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -15,4 +15,10 @@
     </string>
     <string name="warning">Warning</string>
     <string name="profile_image_content_description">image</string>
+    <string name="fa_bullseye">&#xf140;</string>
+    <string name="fa_circle_thin">&#xf1db;</string>
+    <string name="fa_chevron_down">&#xf078;</string>
+    <string name="fa_chevron_up">&#xf077;</string>
+    <string name="fa_line_chart">&#xf201;</string>
+    <string name="fa_pie_chart">&#xf200;</string>
 </resources>

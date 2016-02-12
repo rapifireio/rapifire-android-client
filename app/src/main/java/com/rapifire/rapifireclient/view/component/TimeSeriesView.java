@@ -1,27 +1,19 @@
 package com.rapifire.rapifireclient.view.component;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rapifire.rapifireclient.R;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
+import com.rapifire.rapifireclient.domain.model.TimeSeriesModel;
 import com.rapifire.rapifireclient.view.adapter.ViewWrapper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * Created by ktomek on 05.12.15.
- */
-public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<ThingModel> {
 
-    @Bind(R.id.profile_image_view)
-    RandIcon idRandIcon;
+public class TimeSeriesView extends RelativeLayout implements ViewWrapper.Binder<TimeSeriesModel> {
 
     @Bind(R.id.thing_name_text_view)
     TextView nameTextView;
@@ -30,14 +22,14 @@ public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<
     TextView idTextView;
 
     private boolean alreadyInflated = false;
-    private ThingModel data;
+    private TimeSeriesModel data;
 
-    public ThingItemView(Context context) {
+    public TimeSeriesView(Context context) {
         super(context);
     }
 
-    public static ThingItemView build(Context context) {
-        ThingItemView instance = new ThingItemView(context);
+    public static TimeSeriesView build(Context context) {
+        TimeSeriesView instance = new TimeSeriesView(context);
         instance.onFinishInflate();
         return instance;
     }
@@ -53,15 +45,14 @@ public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<
     }
 
     @Override
-    public void bind(ThingModel data) {
+    public void bind(TimeSeriesModel data) {
         this.data = data;
 
-        nameTextView.setText(data.name);
-        idTextView.setText(data.thingId);
-        idRandIcon.setText(data.name);
+        //nameTextView.setText(data.name);
+        //idTextView.setText(data.thingId);
     }
 
-    public ThingModel getData() {
-        return data;
-    }
+    //public ThingModel getData() {
+    //    return data;
+    //}
 }

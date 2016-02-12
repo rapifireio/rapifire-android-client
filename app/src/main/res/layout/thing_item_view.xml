@@ -1,95 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginRight="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/retweetedContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="72dp"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/retweet_name_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="72dp"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="16dp">
-
-            <ImageView
-                android:id="@+id/profile_image_view"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:contentDescription="@string/profile_image_content_description" />
-        </LinearLayout>
+        <com.rapifire.rapifireclient.view.component.RandIcon
+            android:id="@+id/profile_image_view"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_marginRight="16dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
                 <TextView
-                    android:id="@+id/name_text_view"
+                    android:id="@+id/thing_name_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="Primary text"
+                    android:paddingTop="00dp"
+                    android:paddingBottom="0dp"
+                    />
+
+                <TextView
+                    android:id="@+id/thing_id_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/name_text_view"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/time_ago_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:singleLine="true" />
+                    android:text="Secondary text"
+                    android:paddingBottom="0dp"
+                    android:paddingTop="0dp"/>
             </LinearLayout>
-
-            <!--</RelativeLayout>-->
-
-            <TextView
-                android:id="@+id/id_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLength="140"
-                android:textColorLink="@color/colorPrimaryDark" />
-
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

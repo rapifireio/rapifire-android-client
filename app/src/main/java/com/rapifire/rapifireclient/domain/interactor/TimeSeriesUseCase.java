@@ -27,6 +27,7 @@ public class TimeSeriesUseCase extends UseCase<List<ChartItemModel>> {
     private final TimeSeriesRepository timeSeriesRepository;
     private final String thingId;
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+    private final String key;
 
     private Subscription timeSeriesTypeSubscription = Subscriptions.empty();
 
@@ -34,10 +35,11 @@ public class TimeSeriesUseCase extends UseCase<List<ChartItemModel>> {
     @Inject
     public TimeSeriesUseCase(@Named("workerScheduler") Scheduler workerScheduler,
                              @Named("postWorkScheduler") Scheduler postWorkScheduler,
-                             TimeSeriesRepository timeSeriesRepository, final String thingId) {
+                             TimeSeriesRepository timeSeriesRepository, final String thingId, final String key) {
         super(workerScheduler, postWorkScheduler);
         this.timeSeriesRepository = timeSeriesRepository;
         this.thingId = thingId;
+        this.key = key;
     }
 
     public void execute(Subscriber timeSeriesSubscriber) {
@@ -58,7 +60,7 @@ public class TimeSeriesUseCase extends UseCase<List<ChartItemModel>> {
 
     private Observable<ChartModel> buildUseCaseObservable() {
         Observable<TimeSeriesModel> cache = timeSeriesRepository
-                .getTimeSeries(thingId, LAST_MILLIS)
+                .getTimeSeries(thingId, key, LAST_MILLIS)
                 .flatMap(timeSeriesModels -> Observable.from(timeSeriesModels))
                 .toSortedList((timeSeriesModel, timeSeriesModel2) -> {
                             final long lhs = timeSeriesModel.getDataTimeMillis();

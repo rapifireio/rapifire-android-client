@@ -2,52 +2,139 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_bg">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_to_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Thing ID"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:padding="16dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Thing ID"
-                android:id="@+id/thing_id_text_view" />
+                <com.rapifire.rapifireclient.view.component.RandIcon
+                    android:id="@+id/profile_image_view"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="16dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Thing Name"
-                android:textStyle="bold" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/thing_name_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:text="Primary text"
+                            />
 
-            <TextView
-                android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/thing_id_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text="Secondary text"/>
+                    </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <com.rapifire.rapifireclient.view.component.FontAwsomeView
+                        android:id="@+id/thing_status_fontawsomeview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/fa_bullseye"
+                        android:textColor="@color/gray"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:id="@+id/thing_status_text_view"
+                        android:layout_toRightOf="@+id/thing_status_fontawsomeview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="online"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/thing_last_publish_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="123 ms ago"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:layout_marginTop="16dp">
+
+                    <com.rapifire.rapifireclient.view.component.FontAwsomeView
+                        android:id="@+id/thing_product_fontawsomeview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/fa_circle_thin"
+                        android:textColor="@color/brown"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:id="@+id/thing_product_name_text_view"
+                        android:layout_toRightOf="@+id/thing_product_fontawsomeview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="product"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/latest_data_recycler_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Thing Name"
-                android:id="@+id/thing_name_text_tiew" />
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
         </LinearLayout>
-
     </android.support.v4.widget.SwipeRefreshLayout>
-
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"

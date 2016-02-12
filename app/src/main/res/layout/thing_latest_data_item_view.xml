@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_margin ="16dp"
+    android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/series_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:singleLine="true"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Series name"/>
+
+        <TextView
+            android:id="@+id/series_timestamp_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:text="timestamp"/>
+
+    <TextView
+        android:id="@+id/series_value_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Value"/>
+
+    <com.rapifire.rapifireclient.view.component.FontAwsomeView
+        android:id="@+id/series_line_chart_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/fa_line_chart"
+        android:textColor="@color/brown"
+        android:textSize="32sp" />
+
+    <com.rapifire.rapifireclient.view.component.FontAwsomeView
+        android:id="@+id/series_pie_chart_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/fa_pie_chart"
+        android:textColor="@color/brown"
+        android:textSize="32sp" />
+
+</RelativeLayout>

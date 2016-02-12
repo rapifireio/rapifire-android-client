@@ -15,13 +15,15 @@ import com.rapifire.rapifireclient.view.fragment.TimeSeriesFragment;
 public class TimeSeriesActivity extends AppCompatActivity {
 
     public static final String ARG_THING_ID = "ARG_THING_ID";
+    public static final String ARG_THING_TIMESEIRES_KEY = "ARG_THING_TIMESERIES_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final String thingId = getIntent().getStringExtra(ARG_THING_ID);
+        final String key = getIntent().getStringExtra(ARG_THING_TIMESEIRES_KEY);
         TimeSeriesFragment fragment = new TimeSeriesFragment();
-        setupActivityComponent(fragment, thingId);
+        setupActivityComponent(fragment, thingId, key);
         setContentView(R.layout.activity_things);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.timeline_list, fragment)
@@ -29,9 +31,9 @@ public class TimeSeriesActivity extends AppCompatActivity {
 
     }
 
-    protected void setupActivityComponent(TimeSeriesFragment timeSeriesFragment, final String thingId) {
+    protected void setupActivityComponent(TimeSeriesFragment timeSeriesFragment, final String thingId, String key) {
         final TimeSeriesComponent timeSeriesComponent = RapifireApp.get(this).getUserComponent()
-                .plus(new TimeSeriesModule(this, thingId));
+                .plus(new TimeSeriesModule(this, thingId, key));
         timeSeriesComponent.inject(timeSeriesFragment);
     }
 }

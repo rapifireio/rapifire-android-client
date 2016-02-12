@@ -19,10 +19,11 @@ public interface ThingsService {
     @GET("things")
     Observable<List<Thing>> getThings();
 
-    @GET("thing/{thingId}")
+    @GET("things/{thingId}")
     Observable<ThingDetails> getThingDetails(@Path("thingId") String thingId);
 
-    @GET("thing/{thing}/timeseries/usr")
-    Observable<List<TimeSeries>> getTimeSeries(@Path("thing") String thing,
+    @GET("things/{thingId}/timeseries/{key}")
+    Observable<List<TimeSeries>> getTimeSeries(@Path("thingId") String thingId,
+                                               @Path("key") String key,
                                                @Query("lastMillis") long millis);
 }

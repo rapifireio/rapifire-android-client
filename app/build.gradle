@@ -84,8 +84,8 @@ dependencies {
 }
 
 retrolambda {
-    jdk JAVA8_HOME
-    oldJdk JAVA7_HOME
+    jdk "$System.env.JAVA_HOME"
+    oldJdk "$System.env.JAVA_HOME"
     javaVersion JavaVersion.VERSION_1_7
     defaultMethods false
     incremental true
