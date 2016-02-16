@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,7 +49,6 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Bind(R.id.swipe_to_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-
     @Bind(R.id.profile_image_view)
     RandIcon mThingRandIcon;
     @Bind(R.id.thing_name_text_view)
@@ -65,11 +66,13 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Bind(R.id.thing_product_name_text_view)
     TextView mThingProductNameTextView;
 
-    @Bind(R.id.latest_data_recycler_view)
-    RecyclerView mLatestDataRecyclerView;
+    @Bind(R.id.tab_layout)
+    TabLayout tabLayout;
+    @Bind(R.id.view_pager)
+    ViewPager viewPager;
 
     private ThingModel thingModel;
-
+    private ThingDetailsPagerAdapter thingDetailsPageAdapter;
 
 
     @Override
@@ -91,11 +94,16 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
             ButterKnife.bind(this, contentView);
             mSwipeRefreshLayout.setOnRefreshListener(this);
             mAdapter.setOnItemViewClickedListener(this);
-            mLatestDataRecyclerView.setAdapter(mAdapter);
-
+            
             updateView(this.thingModel);
         }
         mThingDetailsPresenter.subscribe(this);
+
+        thingDetailsPageAdapter = new ThingDetailsPagerAdapter(this.getChildFragmentManager(), mAdapter);
+
+        viewPager.setAdapter(thingDetailsPageAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
         return contentView;
     }
 
