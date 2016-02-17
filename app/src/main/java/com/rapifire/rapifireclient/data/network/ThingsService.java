@@ -16,13 +16,13 @@ import rx.Observable;
  */
 public interface ThingsService {
 
-    @GET("things")
+    @GET("/api/v1/things")
     Observable<List<Thing>> getThings();
 
-    @GET("things/{thingId}")
+    @GET("/api/v1/things/{thingId}")
     Observable<ThingDetails> getThingDetails(@Path("thingId") String thingId);
 
-    @GET("things/{thingId}/timeseries/{key}")
+    @GET("/api/v1/things/{thingId}/timeseries/{key}")
     Observable<List<TimeSeries>> getTimeSeries(@Path("thingId") String thingId,
                                                @Path("key") String key,
                                                @Query("lastMillis") long millis);

@@ -142,7 +142,7 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
         mThingRandIcon.setText(thingDetails.thingModel.name);
         mThingIdTextView.setText(thingDetails.thingModel.thingId);
         mThingNameTextView.setText(thingDetails.thingModel.name);
-        mThingProductNameTextView.setText(thingDetails.getProductName());
+        mThingProductNameTextView.setText(thingDetails.getProductModel().getName());
 
         if(thingDetails.isOnline()) {
             mThingOnlineIcon.setTextColor(Color.GREEN);

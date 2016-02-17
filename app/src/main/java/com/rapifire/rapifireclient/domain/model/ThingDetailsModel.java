@@ -4,7 +4,7 @@ public class ThingDetailsModel {
     public final ThingModel thingModel;
     private boolean online;
     private Long millisSinceLastPublish;
-    private String productName;
+    private ProductModel productModel;
     private LatestDataModel latestDataModel = new LatestDataModel();
 
     public ThingDetailsModel() {
@@ -31,12 +31,12 @@ public class ThingDetailsModel {
         return this.millisSinceLastPublish;
     }
 
-    public void setProductName(String name) {
-        this.productName = name;
+    public void setProductModel(ProductModel product) {
+        this.productModel = product;
     }
 
-    public String getProductName() {
-        return this.productName;
+    public ProductModel getProductModel() {
+        return this.productModel;
     }
 
     public void setLatestData(LatestDataModel latestDataModel) {

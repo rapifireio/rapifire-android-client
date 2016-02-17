@@ -1,9 +1,11 @@
 package com.rapifire.rapifireclient.data.mapper;
 
+import com.rapifire.rapifireclient.data.Product;
 import com.rapifire.rapifireclient.data.ThingDetails;
 import com.rapifire.rapifireclient.data.TimeSeries;
 import com.rapifire.rapifireclient.domain.model.LatestDataModel;
 import com.rapifire.rapifireclient.domain.model.LatestTimeSeriesModel;
+import com.rapifire.rapifireclient.domain.model.ProductModel;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.domain.model.TimeSeriesModel;
@@ -32,8 +34,9 @@ public class ThingDetailsModelDataMapper implements SimpleModelDataMapper<ThingD
         final ThingDetailsModel thingDetailsModel = new ThingDetailsModel(thingModel);
         thingDetailsModel.setOnline(thingDetails.isOnline());
         thingDetailsModel.setMillisSinceLastPublish(thingDetails.getMillisecondsSinceLastPublish());
-        thingDetailsModel.setProductName(thingDetails.getProduct().getName());
         thingDetailsModel.setLatestData(transformLatestData(thingDetails.getLatestData()));
+
+        thingDetailsModel.setProductModel(transformProduct(thingDetails.getProduct()));
 
         return thingDetailsModel;
     }
@@ -53,5 +56,14 @@ public class ThingDetailsModelDataMapper implements SimpleModelDataMapper<ThingD
         }
 
         return latestDataModel;
+    }
+
+    private ProductModel transformProduct(Product product) {
+        ProductModel result = new ProductModel();
+        result.setId(product.getId());
+        result.setName(product.getName());
+        result.setHartbeat(product.getHartbeat());
+
+        return result;
     }
 }
