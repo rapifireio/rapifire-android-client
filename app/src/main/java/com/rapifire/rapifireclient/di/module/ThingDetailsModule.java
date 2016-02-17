@@ -1,7 +1,9 @@
 package com.rapifire.rapifireclient.di.module;
 
+import com.rapifire.rapifireclient.data.repository.ProductCommandsDataRepository;
 import com.rapifire.rapifireclient.data.repository.ThingDetailsDataRepository;
 import com.rapifire.rapifireclient.di.ActivityScope;
+import com.rapifire.rapifireclient.domain.interactor.GetProductCommandsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.GetThingDetailsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.RefreshThingDetailsUseCase;
 import com.rapifire.rapifireclient.view.activity.ThingDetailsActivity;
@@ -51,4 +53,13 @@ public class ThingDetailsModule {
             ThingDetailsDataRepository thingsRepository) {
         return new RefreshThingDetailsUseCase(workerSheduler, postScheduler, thingsRepository);
     }
+
+ /*   @Provides
+    @ActivityScope
+    public GetProductCommandsUseCase provideGetProductCommandsUseCase(
+            @Named("postWorkScheduler") Scheduler postScheduler,
+            @Named("workerScheduler") Scheduler workerSheduler,
+            ProductCommandsDataRepository repository) {
+        return new GetProductCommandsUseCase(workerSheduler, postScheduler, repository);
+    }*/
 }

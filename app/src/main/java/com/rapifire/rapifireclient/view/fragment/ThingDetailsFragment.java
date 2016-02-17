@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.rapifire.rapifireclient.R;
 import com.rapifire.rapifireclient.domain.model.LatestTimeSeriesModel;
+import com.rapifire.rapifireclient.domain.model.ProductCommandModel;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.mvp.presenter.ThingDetailsPresenter;
@@ -28,6 +29,8 @@ import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapter;
 import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapterListener;
 import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
 import com.rapifire.rapifireclient.view.component.RandIcon;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -159,6 +162,11 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
         }
 
         mAdapter.setItems(thingDetails.getLatestData().getLatestData());
+    }
+
+    @Override
+    public void setProductCommands(List<ProductCommandModel> productCommands) {
+
     }
 
     @Override

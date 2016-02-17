@@ -1,16 +1,20 @@
 package com.rapifire.rapifireclient.di.module;
 
 import com.rapifire.rapifireclient.data.cache.MemoryCache;
+import com.rapifire.rapifireclient.data.mapper.ProductCommandsModelDataMapper;
 import com.rapifire.rapifireclient.data.mapper.ThingDetailsModelDataMapper;
 import com.rapifire.rapifireclient.data.mapper.TimeSeriesModelDataMapper;
 import com.rapifire.rapifireclient.data.network.BasicAuthInterceptor;
+import com.rapifire.rapifireclient.data.network.ProductsService;
 import com.rapifire.rapifireclient.data.network.RapifireSession;
 import com.rapifire.rapifireclient.data.network.ThingsService;
+import com.rapifire.rapifireclient.data.repository.ProductCommandsDataRepository;
 import com.rapifire.rapifireclient.data.repository.ThingDetailsDataRepository;
 import com.rapifire.rapifireclient.data.repository.ThingsDataRepository;
 import com.rapifire.rapifireclient.data.repository.TimeSeriesDataRepository;
 import com.rapifire.rapifireclient.di.UserScope;
 import com.rapifire.rapifireclient.data.mapper.ThingModelDataMapper;
+import com.rapifire.rapifireclient.domain.repository.ProductCommandsRepository;
 import com.rapifire.rapifireclient.domain.repository.TimeSeriesRepository;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -57,6 +61,12 @@ public class UserModule {
 
     @Provides
     @UserScope
+    public ProductCommandsModelDataMapper provideProductCommandsModelDataMapper() {
+        return new ProductCommandsModelDataMapper();
+    }
+
+    @Provides
+    @UserScope
     public ThingsDataRepository provideThingRepository(ThingsService thingsService,
                                                        MemoryCache memoryCache,
                                                        ThingModelDataMapper thingModelDataMapper) {
@@ -78,6 +88,12 @@ public class UserModule {
         return new TimeSeriesDataRepository(thingsService, timeSeriesModelDataMapper);
     }
 
+    @Provides
+    @UserScope
+    public ProductCommandsRepository provideProductCommandsRepository(ProductsService productsService, MemoryCache memoryCache,
+                                                            ProductCommandsModelDataMapper productCommandsModelDataMapper) {
+        return new ProductCommandsDataRepository(memoryCache, productsService, productCommandsModelDataMapper);
+    }
 
     @Provides
     @UserScope
@@ -88,6 +104,17 @@ public class UserModule {
         builder.client(client);
         Retrofit retrofit = builder.build();
         return retrofit.create(ThingsService.class);
+    }
+
+    @Provides
+    @UserScope
+    public ProductsService provideProductsService(Retrofit.Builder builder, OkHttpClient client,
+                                              BasicAuthInterceptor interceptor) {
+        client.interceptors().clear();
+        client.interceptors().add(interceptor);
+        builder.client(client);
+        Retrofit retrofit = builder.build();
+        return retrofit.create(ProductsService.class);
     }
 
     @Provides
