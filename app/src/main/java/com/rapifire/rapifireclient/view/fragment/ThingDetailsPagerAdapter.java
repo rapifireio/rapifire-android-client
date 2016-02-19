@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
+import com.rapifire.rapifireclient.view.adapter.ThingCommandsAdapter;
 import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapter;
 
 /**
@@ -15,11 +16,13 @@ public class ThingDetailsPagerAdapter extends FragmentPagerAdapter {
     private String tabTitles[] = new String[] { "Graphs", "Commands" };
 
     private ThingDetailsModel thingDetails;
-    ThingLatestDataAdapter mAdapter;
+    private ThingLatestDataAdapter mAdapter;
+    private ThingCommandsAdapter mCommandsAdapter;
 
-    public ThingDetailsPagerAdapter(FragmentManager fm, ThingLatestDataAdapter mAdapter) {
+    public ThingDetailsPagerAdapter(FragmentManager fm, ThingLatestDataAdapter mAdapter, ThingCommandsAdapter mCommandsAdapter) {
         super(fm);
         this.mAdapter = mAdapter;
+        this.mCommandsAdapter = mCommandsAdapter;
     }
 
 
@@ -32,7 +35,10 @@ public class ThingDetailsPagerAdapter extends FragmentPagerAdapter {
             return fragment;
         }
 
-        return new ThingCommandsFragment();
+        ThingCommandsFragment fragment = new ThingCommandsFragment();
+        fragment.setAdapter(mCommandsAdapter);
+
+        return fragment;
     }
 
     @Override

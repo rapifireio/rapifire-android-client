@@ -7,6 +7,7 @@ import com.rapifire.rapifireclient.domain.interactor.GetProductCommandsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.GetThingDetailsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.RefreshThingDetailsUseCase;
 import com.rapifire.rapifireclient.view.activity.ThingDetailsActivity;
+import com.rapifire.rapifireclient.view.adapter.ThingCommandsAdapter;
 import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapter;
 import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
 
@@ -36,6 +37,13 @@ public class ThingDetailsModule {
     public ThingLatestDataAdapter provideThingLatestDataAdapter() {
         return new ThingLatestDataAdapter(thingDetailsActivity);
     }
+
+    @Provides
+    @ActivityScope
+    public ThingCommandsAdapter provideThingCommandsAdapter() {
+        return new ThingCommandsAdapter(thingDetailsActivity);
+    }
+
     @Provides
     @ActivityScope
     public GetThingDetailsUseCase provideGetThingDetailsUseCase(

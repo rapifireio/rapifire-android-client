@@ -5,7 +5,7 @@ package com.rapifire.rapifireclient.domain.model;
  */
 public class ProductCommandModel {
     private String name;
-    private String type;
+    private ProductCommandType type;
     private String visibility;
     private String payload;
 
@@ -13,7 +13,7 @@ public class ProductCommandModel {
         return name;
     }
 
-    public String getType() {
+    public ProductCommandType getType() {
         return type;
     }
 
@@ -29,7 +29,7 @@ public class ProductCommandModel {
         this.name = name;
     }
 
-    public void setType(String type) {
+    public void setType(ProductCommandType type) {
         this.type = type;
     }
 

@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import com.rapifire.rapifireclient.mvp.presenter.ThingDetailsPresenter;
 import com.rapifire.rapifireclient.mvp.view.ThingDetailsView;
 import com.rapifire.rapifireclient.view.activity.ThingDetailsActivity;
 import com.rapifire.rapifireclient.view.activity.TimeSeriesActivity;
+import com.rapifire.rapifireclient.view.adapter.ThingCommandsAdapter;
+import com.rapifire.rapifireclient.view.adapter.ThingCommandsAdapterListener;
 import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapter;
 import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapterListener;
 import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
@@ -40,12 +43,15 @@ import butterknife.ButterKnife;
 /**
  * Created by witek on 08.12.15.
  */
-public class ThingDetailsFragment extends Fragment implements ThingDetailsView, SwipeRefreshLayout.OnRefreshListener, ThingLatestDataAdapterListener {
+public class ThingDetailsFragment extends Fragment implements ThingDetailsView, SwipeRefreshLayout.OnRefreshListener, ThingLatestDataAdapterListener, ThingCommandsAdapterListener {
+    private final static String TAG = "ThingDetailsFragment";
 
     @Inject
     ThingDetailsPresenter mThingDetailsPresenter;
     @Inject
     ThingLatestDataAdapter mAdapter;
+    @Inject
+    ThingCommandsAdapter mCommandsAdapter;
 
     @Bind(R.id.progress_bar)
     ProgressBar mProgressBar;
@@ -97,12 +103,13 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
             ButterKnife.bind(this, contentView);
             mSwipeRefreshLayout.setOnRefreshListener(this);
             mAdapter.setOnItemViewClickedListener(this);
-            
+            mCommandsAdapter.setOnItemViewClickedListener(this);
+
             updateView(this.thingModel);
         }
         mThingDetailsPresenter.subscribe(this);
 
-        thingDetailsPageAdapter = new ThingDetailsPagerAdapter(this.getChildFragmentManager(), mAdapter);
+        thingDetailsPageAdapter = new ThingDetailsPagerAdapter(this.getChildFragmentManager(), mAdapter, mCommandsAdapter);
 
         viewPager.setAdapter(thingDetailsPageAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -166,7 +173,7 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
 
     @Override
     public void setProductCommands(List<ProductCommandModel> productCommands) {
-
+        mCommandsAdapter.setItems(productCommands);
     }
 
     @Override
@@ -187,6 +194,11 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Override
     public void onThingLatestDataItemViewClicked(LatestTimeSeriesModel latestTimeSeriesModel) {
         mThingDetailsPresenter.onThingLatestDataItemClicked(latestTimeSeriesModel);
+    }
+
+    @Override
+    public void onThingCommandItemViewClicked(ProductCommandModel productCommandModel) {
+        Log.i(TAG, String.format("Comand with nae %s clicked", productCommandModel.getName()));
     }
 
     @Override

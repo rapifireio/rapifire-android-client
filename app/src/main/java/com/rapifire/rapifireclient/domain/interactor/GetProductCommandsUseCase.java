@@ -28,11 +28,11 @@ public class GetProductCommandsUseCase extends UseCase<List<ProductCommandModel>
         this.repository = repository;
     }
 
-    public void execute(final Subscriber UseCaseSubscriber, ProductModel thing) {
+    public void execute(final Subscriber useCaseSubscriber, ProductModel thing) {
         this.subscription = this.buildUseCaseObservable(thing)
                 .subscribeOn(workerSheduler)
                 .observeOn(postWorkSheduler)
-                .subscribe(UseCaseSubscriber);
+                .subscribe(useCaseSubscriber);
     }
 
     protected Observable<List<ProductCommandModel>> buildUseCaseObservable(ProductModel product) {

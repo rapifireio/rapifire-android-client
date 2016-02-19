@@ -21,4 +21,8 @@
     <string name="fa_chevron_up">&#xf077;</string>
     <string name="fa_line_chart">&#xf201;</string>
     <string name="fa_pie_chart">&#xf200;</string>
+    <string name="fa_file_text_o">&#xf0f6;</string>
+    <string name="fa_file_zip_o">&#xf1c6;</string>
+
+
 </resources>

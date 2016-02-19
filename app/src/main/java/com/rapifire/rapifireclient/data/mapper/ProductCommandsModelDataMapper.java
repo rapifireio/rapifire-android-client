@@ -3,6 +3,7 @@ package com.rapifire.rapifireclient.data.mapper;
 import com.rapifire.rapifireclient.data.ProductCommand;
 import com.rapifire.rapifireclient.data.Thing;
 import com.rapifire.rapifireclient.domain.model.ProductCommandModel;
+import com.rapifire.rapifireclient.domain.model.ProductCommandType;
 import com.rapifire.rapifireclient.domain.model.ProductModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 
@@ -40,7 +41,7 @@ public class ProductCommandsModelDataMapper implements ModelDataMapper<ProductCo
 
         result.setName(productCommand.getName());
         result.setPayload(productCommand.getPayload());
-        result.setType(productCommand.getType());
+        result.setType("text".equals(productCommand.getType()) ? ProductCommandType.TEXT : ProductCommandType.BINARY);
         result.setVisibility(productCommand.getVisibility());
 
         return result;

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_margin ="16dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/command_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:singleLine="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Command name"/>
+
+    <TextView
+        android:id="@+id/command_visibility_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:text="visibility"/>
+
+    <TextView
+        android:id="@+id/command_payload_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Value"/>
+
+    <com.rapifire.rapifireclient.view.component.FontAwsomeView
+        android:id="@+id/command_text_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/fa_file_text_o"
+        android:textColor="@color/brown"
+        android:textSize="32sp" />
+
+    <com.rapifire.rapifireclient.view.component.FontAwsomeView
+        android:id="@+id/command_binary_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/fa_file_zip_o"
+        android:textColor="@color/brown"
+        android:textSize="32sp" />
+
+</RelativeLayout>
