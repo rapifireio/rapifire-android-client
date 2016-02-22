@@ -1,7 +1,11 @@
 package com.rapifire.rapifireclient.di.module;
 
+import com.rapifire.rapifireclient.data.cache.MemoryCache;
+import com.rapifire.rapifireclient.data.mapper.ThingModelDataMapper;
+import com.rapifire.rapifireclient.data.network.ThingsService;
 import com.rapifire.rapifireclient.data.repository.ThingsDataRepository;
 import com.rapifire.rapifireclient.di.ActivityScope;
+import com.rapifire.rapifireclient.di.UserScope;
 import com.rapifire.rapifireclient.domain.interactor.GetThingsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.RefreshThingsUseCase;
 import com.rapifire.rapifireclient.view.activity.ThingsActivity;
@@ -55,4 +59,5 @@ public class ThingsModule {
             ThingsDataRepository thingsRepository) {
         return new RefreshThingsUseCase(workerSheduler, postScheduler, thingsRepository);
     }
+
 }

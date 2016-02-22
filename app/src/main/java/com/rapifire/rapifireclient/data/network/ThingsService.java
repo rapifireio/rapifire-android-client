@@ -7,6 +7,7 @@ import com.rapifire.rapifireclient.data.TimeSeries;
 import java.util.List;
 
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
@@ -26,4 +27,7 @@ public interface ThingsService {
     Observable<List<TimeSeries>> getTimeSeries(@Path("thingId") String thingId,
                                                @Path("key") String key,
                                                @Query("lastMillis") long millis);
+
+    @POST("/api/v1/things/{thingId}/commands/{commandName}")
+    Observable<Void> sendCommand(@Path("thingId") String thingId, @Path("commandName") String commandName);
 }

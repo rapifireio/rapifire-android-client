@@ -7,6 +7,7 @@ import com.rapifire.rapifireclient.di.ActivityScope;
 import com.rapifire.rapifireclient.domain.interactor.GetProductCommandsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.GetThingDetailsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.RefreshThingDetailsUseCase;
+import com.rapifire.rapifireclient.domain.interactor.SendCommandToThingUseCase;
 import com.rapifire.rapifireclient.domain.model.LatestTimeSeriesModel;
 import com.rapifire.rapifireclient.domain.model.ProductCommandModel;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
@@ -25,14 +26,16 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
     private final GetThingDetailsUseCase getThingDetailsUseCase;
     private final GetProductCommandsUseCase getProductCommandsUseCase;
     private final RefreshThingDetailsUseCase refreshThingDetailsUseCase;
+    private final SendCommandToThingUseCase sendCommandToThingUseCase;
     private ThingDetailsView view;
 
     @Inject
     public ThingDetailsPresenter(GetThingDetailsUseCase getThingDetailsUseCase,
-                                 RefreshThingDetailsUseCase refreshThingDetailsUseCase, GetProductCommandsUseCase getProductCommandsUseCase) {
+                                 RefreshThingDetailsUseCase refreshThingDetailsUseCase, GetProductCommandsUseCase getProductCommandsUseCase, SendCommandToThingUseCase sendCommandToThingUseCase) {
         this.getThingDetailsUseCase = getThingDetailsUseCase;
         this.refreshThingDetailsUseCase = refreshThingDetailsUseCase;
         this.getProductCommandsUseCase = getProductCommandsUseCase;
+        this.sendCommandToThingUseCase = sendCommandToThingUseCase;
     }
 
     public void loadThingDetails(ThingModel thingModel) {
@@ -49,6 +52,10 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
         view.navigateToTimeSeries(latestTimeSeriesModel.getName());
     }
 
+    public void sendCommandToThing(String thingId, String commandName) {
+        sendCommandToThingUseCase.execute(new SendCommandToThingSubscriber(), thingId, commandName);
+    }
+
     @Override
     public void subscribe(ThingDetailsView view) {
         this.view = view;
@@ -61,6 +68,7 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
             refreshThingDetailsUseCase.unsubscribe();
             getThingDetailsUseCase.unsubscribe();
             getProductCommandsUseCase.unsubscribe();
+            sendCommandToThingUseCase.unsubscribe();
         }
     }
 
@@ -109,6 +117,27 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
             if (view != null) {
                 view.setProductCommands(productCommands);
             }
+        }
+    }
+
+    private class SendCommandToThingSubscriber extends Subscriber<Void> {
+
+        @Override
+        public void onCompleted() {
+            view.showProgress(false);
+            view.showRefresh(false);
+        }
+
+        @Override
+        public void onError(Throwable throwable) {
+            Log.e("ThingDetailsPresenter", throwable.getMessage(), throwable);
+            view.showProgress(false);
+            view.showRefresh(false);
+        }
+
+        @Override
+        public void onNext(Void arg) {
+
         }
     }
 }

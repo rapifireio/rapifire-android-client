@@ -64,4 +64,8 @@ public class ThingsDataRepository implements ThingsRepository {
                 }
         );
     }
+
+    public Observable<Void> sendCommandToThing(String thingId, String commandName) {
+        return thingsService.sendCommand(thingId, commandName);
+    }
 }

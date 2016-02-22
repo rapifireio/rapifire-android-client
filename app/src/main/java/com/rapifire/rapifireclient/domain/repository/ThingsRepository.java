@@ -1,5 +1,6 @@
 package com.rapifire.rapifireclient.domain.repository;
 
+import com.rapifire.rapifireclient.domain.model.ProductCommandModel;
 import com.rapifire.rapifireclient.domain.model.ThingDetailsModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 
@@ -12,4 +13,5 @@ import rx.Observable;
  */
 public interface ThingsRepository {
     Observable<List<ThingModel>> getThings(boolean forceSync);
+    Observable<Void> sendCommandToThing(String thingId, String commandName);
 }

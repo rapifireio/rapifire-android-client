@@ -13,6 +13,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
     <string name="warning">Warning</string>
     <string name="profile_image_content_description">image</string>
     <string name="fa_bullseye">&#xf140;</string>
