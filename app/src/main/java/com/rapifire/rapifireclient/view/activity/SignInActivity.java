@@ -121,6 +121,11 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
         dialog.show();
     }
 
+    @Override
+    public void showMessage(int stringId) {
+        this.showMessage(getString(stringId));
+    }
+
     @OnClick(R.id.signin_button)
     public void signin() {
         signinPresenter.signin();

@@ -142,9 +142,14 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Override
     public void showMessage(final String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(message).setTitle(getString(R.string.warning));
+        builder.setMessage(message);
         final AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void showMessage(int stringId) {
+        this.showMessage(getString(stringId));
     }
 
     @Override
@@ -201,10 +206,10 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
         Log.i(TAG, String.format("Comand with nae %s clicked", productCommandModel.getName()));
         new AlertDialog.Builder(getActivity())
             .setMessage("Send command to the device?")
-            .setPositiveButton(R.string.send, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    mThingDetailsPresenter.sendCommandToThing(thingModel.thingId, productCommandModel.getName());
-                }
+                .setPositiveButton(R.string.send, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        mThingDetailsPresenter.sendCommandToThing(thingModel.thingId, productCommandModel.getName());
+                    }
             })
             .setNegativeButton(R.string.cancel, null)
             .setIcon(android.R.drawable.ic_dialog_alert)
@@ -218,6 +223,14 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
         intent.putExtra(TimeSeriesActivity.ARG_THING_TIMESEIRES_KEY, seriesName);
 
         getActivity().startActivity(intent);
+    }
+
+    public void notifyCommandSentCompleted() {
+
+    }
+
+    public void notifyCommandSentError() {
+
     }
 
     private void updateView(ThingModel thingModel) {

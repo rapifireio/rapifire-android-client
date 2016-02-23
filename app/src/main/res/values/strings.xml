@@ -13,6 +13,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="thing_details_command_send_success">Command successfully sent to server</string>
+    <string name="thing_details_command_send_failure">Command sent failure</string>
+
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
     <string name="warning">Warning</string>

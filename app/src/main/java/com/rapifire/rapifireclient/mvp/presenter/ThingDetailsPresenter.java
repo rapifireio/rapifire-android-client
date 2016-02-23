@@ -3,6 +3,7 @@ package com.rapifire.rapifireclient.mvp.presenter;
 
 import android.util.Log;
 
+import com.rapifire.rapifireclient.R;
 import com.rapifire.rapifireclient.di.ActivityScope;
 import com.rapifire.rapifireclient.domain.interactor.GetProductCommandsUseCase;
 import com.rapifire.rapifireclient.domain.interactor.GetThingDetailsUseCase;
@@ -126,6 +127,7 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
         public void onCompleted() {
             view.showProgress(false);
             view.showRefresh(false);
+            view.showMessage(R.string.thing_details_command_send_success);
         }
 
         @Override
@@ -133,6 +135,7 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
             Log.e("ThingDetailsPresenter", throwable.getMessage(), throwable);
             view.showProgress(false);
             view.showRefresh(false);
+            view.showMessage(R.string.thing_details_command_send_failure);
         }
 
         @Override

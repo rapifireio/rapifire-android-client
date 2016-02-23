@@ -37,9 +37,6 @@ public class TimeSeriesFragment extends Fragment implements TimeSeriesView {
     @Inject
     TimeSeriesPresenter mTimeSeriesPresenter;
 
-//    @Bind(R.id.progress_bar)
-//    ProgressBar mProgressBar;
-
     @Bind(R.id.line_chart)
     LineChart mLineChart;
     @Bind(R.id.pie_chart)
@@ -81,6 +78,11 @@ public class TimeSeriesFragment extends Fragment implements TimeSeriesView {
         dialog.show();
     }
 
+    @Override
+    public void showMessage(int stringId) {
+        this.showMessage(getString(stringId));
+    }
+    
     @Override
     public void showProgress(boolean show) {
 //        mProgressBar.setVisibility(show ? View.VISIBLE : View.GONE);

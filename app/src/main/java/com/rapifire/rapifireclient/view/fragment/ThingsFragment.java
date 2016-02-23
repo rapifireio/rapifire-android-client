@@ -101,6 +101,11 @@ public class ThingsFragment extends Fragment implements ThingsView,
     }
 
     @Override
+    public void showMessage(int stringId) {
+        this.showMessage(getString(stringId));
+    }
+
+    @Override
     public void setThings(List<ThingModel> things) {
         mAdapter.setItems(things);
         mAdapter.notifyDataSetChanged();
