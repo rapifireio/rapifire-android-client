@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rapifire.rapifireclient.R;
 import com.rapifire.rapifireclient.domain.model.LatestTimeSeriesModel;
@@ -153,6 +154,11 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     }
 
     @Override
+    public void showShortToast(int messageId) {
+        Toast.makeText(getContext(), getString(messageId), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void setThingDetails(ThingDetailsModel thingDetails) {
         mThingRandIcon.setText(thingDetails.thingModel.name);
         mThingIdTextView.setText(thingDetails.thingModel.thingId);
@@ -204,16 +210,8 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Override
     public void onThingCommandItemViewClicked(ProductCommandModel productCommandModel) {
         Log.i(TAG, String.format("Comand with nae %s clicked", productCommandModel.getName()));
-        new AlertDialog.Builder(getActivity())
-            .setMessage("Send command to the device?")
-                .setPositiveButton(R.string.send, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        mThingDetailsPresenter.sendCommandToThing(thingModel.thingId, productCommandModel.getName());
-                    }
-            })
-            .setNegativeButton(R.string.cancel, null)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .show();
+
+        mThingDetailsPresenter.sendCommandToThing(thingModel.thingId, productCommandModel.getName());
     }
 
     @Override
@@ -223,14 +221,6 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
         intent.putExtra(TimeSeriesActivity.ARG_THING_TIMESEIRES_KEY, seriesName);
 
         getActivity().startActivity(intent);
-    }
-
-    public void notifyCommandSentCompleted() {
-
-    }
-
-    public void notifyCommandSentError() {
-
     }
 
     private void updateView(ThingModel thingModel) {

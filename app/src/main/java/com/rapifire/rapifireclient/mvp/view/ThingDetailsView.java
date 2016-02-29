@@ -12,5 +12,6 @@ public interface ThingDetailsView extends MVPView {
     void setProductCommands(List<ProductCommandModel> productCommands);
     void showProgress(boolean show);
     void showRefresh(boolean show);
+    void showShortToast(int messageId);
     void navigateToTimeSeries(String seriesName);
 }

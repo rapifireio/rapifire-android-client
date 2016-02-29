@@ -127,7 +127,7 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
         public void onCompleted() {
             view.showProgress(false);
             view.showRefresh(false);
-            view.showMessage(R.string.thing_details_command_send_success);
+            view.showShortToast(R.string.thing_details_command_send_success);
         }
 
         @Override
@@ -135,7 +135,7 @@ public class ThingDetailsPresenter implements Presenter<ThingDetailsView> {
             Log.e("ThingDetailsPresenter", throwable.getMessage(), throwable);
             view.showProgress(false);
             view.showRefresh(false);
-            view.showMessage(R.string.thing_details_command_send_failure);
+            view.showShortToast(R.string.thing_details_command_send_failure);
         }
 
         @Override
