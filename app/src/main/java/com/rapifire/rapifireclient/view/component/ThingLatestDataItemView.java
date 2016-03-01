@@ -12,6 +12,8 @@ import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.view.adapter.ViewWrapper;
 import com.rapifire.rapifireclient.view.other.DurationFormatter;
 
+import org.joda.time.DateTime;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -64,7 +66,9 @@ public class ThingLatestDataItemView extends RelativeLayout implements ViewWrapp
 
         nameTextView.setText(data.getName());
 
-        timestampTextView.setText(durationFormatter.formatDurationInMillisTolastOccurence(data.getDataTimeMillis()));
+        final long durationInMillis = System.currentTimeMillis() - data.getDataTimeMillis();
+
+        timestampTextView.setText(durationFormatter.formatDurationInMillisTolastOccurence(durationInMillis));
         valueTextView.setText(data.getValueAsString());
 
         switch(data.getTimeSeriesModel().getTimeSeriesType()) {
