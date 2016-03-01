@@ -33,6 +33,12 @@ import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapter;
 import com.rapifire.rapifireclient.view.adapter.ThingLatestDataAdapterListener;
 import com.rapifire.rapifireclient.view.adapter.ThingsAdapter;
 import com.rapifire.rapifireclient.view.component.RandIcon;
+import com.rapifire.rapifireclient.view.other.DurationFormatter;
+
+import org.joda.time.Duration;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.util.List;
 
@@ -84,6 +90,7 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     private ThingModel thingModel;
     private ThingDetailsPagerAdapter thingDetailsPageAdapter;
 
+    private DurationFormatter durationFormatter = new DurationFormatter();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -173,11 +180,7 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
             mThingStatusTextView.setText("offline");
         }
 
-        if(thingDetails.getMillisSinceLastPublish() == null) {
-            mThingLastPublishTextView.setText("never");
-        } else {
-            mThingLastPublishTextView.setText(String.format("%s ms ago", thingDetails.getMillisSinceLastPublish()));
-        }
+        mThingLastPublishTextView.setText(durationFormatter.formatDurationInMillisTolastOccurence(thingDetails.getMillisSinceLastPublish()));
 
         mAdapter.setItems(thingDetails.getLatestData().getLatestData());
     }

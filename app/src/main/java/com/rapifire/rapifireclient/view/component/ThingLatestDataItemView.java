@@ -10,6 +10,7 @@ import com.rapifire.rapifireclient.domain.interactor.TimeSeriesType;
 import com.rapifire.rapifireclient.domain.model.LatestTimeSeriesModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 import com.rapifire.rapifireclient.view.adapter.ViewWrapper;
+import com.rapifire.rapifireclient.view.other.DurationFormatter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,6 +34,7 @@ public class ThingLatestDataItemView extends RelativeLayout implements ViewWrapp
 
     private boolean alreadyInflated = false;
     private LatestTimeSeriesModel data;
+    private DurationFormatter durationFormatter = new DurationFormatter();
 
     public ThingLatestDataItemView(Context context) {
         super(context);
@@ -61,7 +63,8 @@ public class ThingLatestDataItemView extends RelativeLayout implements ViewWrapp
         pieChartIcon.setVisibility(View.GONE);
 
         nameTextView.setText(data.getName());
-        timestampTextView.setText(String.valueOf(data.getDataTimeMillis()));
+
+        timestampTextView.setText(durationFormatter.formatDurationInMillisTolastOccurence(data.getDataTimeMillis()));
         valueTextView.setText(data.getValueAsString());
 
         switch(data.getTimeSeriesModel().getTimeSeriesType()) {

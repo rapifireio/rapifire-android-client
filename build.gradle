@@ -26,7 +26,8 @@ ext {
             junit                 : "4.12",
             mockito               : "1.10.8",
             robolectric           : "3.0",
-            mpcharts              : "v2.1.6"
+            mpcharts              : "v2.1.6",
+            jodatime              : "2.9.2"
     ]
 }
 

@@ -72,6 +72,9 @@ dependencies {
     //charts
     compile "com.github.PhilJay:MPAndroidChart:${lib.mpcharts}"
 
+    compile "joda-time:joda-time:${lib.jodatime}"
+
+
     //for ui test run on device or emulator
 //    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2"
 //    androidTestCompile "com.android.support:support-annotations:${lib.supportVersion}"
