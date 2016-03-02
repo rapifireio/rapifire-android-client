@@ -7,10 +7,6 @@ public class ThingDetailsModel {
     private ProductModel productModel;
     private LatestDataModel latestDataModel = new LatestDataModel();
 
-    public ThingDetailsModel() {
-        this.thingModel = new ThingModel("Local created thing ID", "Local created thing name");
-    }
-
     public ThingDetailsModel(ThingModel thingModel) {
         this.thingModel = thingModel;
     }

@@ -26,8 +26,8 @@ public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<
     @Bind(R.id.thing_name_text_view)
     TextView nameTextView;
 
-    @Bind(R.id.thing_id_text_view)
-    TextView idTextView;
+    @Bind(R.id.thing_product_name_text_view)
+    TextView productNameTextView;
 
     private boolean alreadyInflated = false;
     private ThingModel data;
@@ -57,7 +57,7 @@ public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<
         this.data = data;
 
         nameTextView.setText(data.name);
-        idTextView.setText(data.thingId);
+        productNameTextView.setText(data.getProduct().getName());
         idRandIcon.setText(data.name);
     }
 

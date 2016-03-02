@@ -8,9 +8,15 @@ import java.io.Serializable;
 public class ThingModel implements Serializable {
     public final String thingId;
     public final String name;
+    private final ProductModel product;
 
-    public ThingModel(String thingId, String name) {
+    public ThingModel(String thingId, String name, ProductModel product) {
         this.thingId = thingId;
         this.name = name;
+        this.product = product;
+    }
+
+    public ProductModel getProduct() {
+        return product;
     }
 }

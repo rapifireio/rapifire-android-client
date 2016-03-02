@@ -1,9 +1,11 @@
 package com.rapifire.rapifireclient.domain.model;
 
+import java.io.Serializable;
+
 /**
  * Created by witek on 17.02.16.
  */
-public class ProductModel {
+public class ProductModel implements Serializable {
     private String id;
     private String name;
     private int hartbeat;

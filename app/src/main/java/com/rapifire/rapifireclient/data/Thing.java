@@ -6,6 +6,7 @@ package com.rapifire.rapifireclient.data;
 public class Thing {
     private String thingId;
     private String name;
+    private Product product;
 
     public Thing(String thingId, String name) {
         this.thingId = thingId;
@@ -18,5 +19,9 @@ public class Thing {
 
     public String getName() {
         return name;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 }

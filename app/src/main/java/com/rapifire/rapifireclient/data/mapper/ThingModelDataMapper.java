@@ -1,6 +1,8 @@
 package com.rapifire.rapifireclient.data.mapper;
 
+import com.rapifire.rapifireclient.data.Product;
 import com.rapifire.rapifireclient.data.Thing;
+import com.rapifire.rapifireclient.domain.model.ProductModel;
 import com.rapifire.rapifireclient.domain.model.ThingModel;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import rx.Observable;
  * Created by ktomek on 05.12.15.
  */
 public class ThingModelDataMapper implements ModelDataMapper<ThingModel, Thing> {
+
+    private ProductTransformer productTransformer = new ProductTransformer();
 
     @Override
     public ThingModel transform(Thing thing) {
@@ -37,7 +41,9 @@ public class ThingModelDataMapper implements ModelDataMapper<ThingModel, Thing> 
     private ThingModel transformThing(Thing thing) {
         final String id = thing.getThingId();
         final String name = thing.getName();
-        final ThingModel thingModel = new ThingModel(id, name);
+        final ProductModel product = productTransformer.transformProduct(thing.getProduct());
+        final ThingModel thingModel = new ThingModel(id, name, product);
+
         return thingModel;
     }
 }

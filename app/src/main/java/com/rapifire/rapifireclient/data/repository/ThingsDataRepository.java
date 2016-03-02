@@ -50,21 +50,6 @@ public class ThingsDataRepository implements ThingsRepository {
         return Observable.concat(cacheObservable, networkObservable).first();
     }
 
-    public Observable<ThingDetailsModel> getThingDetails(boolean forceSync) {
-        return Observable.create(subscriber -> {
-                    try {
-                        if (!subscriber.isUnsubscribed()) {
-                            ThingDetailsModel thingDetailsModel = new ThingDetailsModel();
-                            subscriber.onNext(thingDetailsModel);
-                            subscriber.onCompleted();
-                        }
-                    } catch (Exception e) {
-                        subscriber.onError(e);
-                    }
-                }
-        );
-    }
-
     public Observable<Void> sendCommandToThing(String thingId, String commandName) {
         return thingsService.sendCommand(thingId, commandName);
     }

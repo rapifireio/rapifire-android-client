@@ -16,6 +16,8 @@ import rx.Observable;
 
 public class ThingDetailsModelDataMapper implements SimpleModelDataMapper<ThingDetailsModel, ThingDetails> {
 
+    private ProductTransformer productTransformer = new ProductTransformer();
+
     @Override
     public ThingDetailsModel transform(ThingDetails thingDetails) {
         return transformThingDetails(thingDetails);
@@ -29,14 +31,14 @@ public class ThingDetailsModelDataMapper implements SimpleModelDataMapper<ThingD
     private ThingDetailsModel transformThingDetails(ThingDetails thingDetails) {
         final String id = thingDetails.getThingId();
         final String name = thingDetails.getName();
-        final ThingModel thingModel = new ThingModel(id, name);
+        final ThingModel thingModel = new ThingModel(id, name, productTransformer.transformProduct(thingDetails.getProduct()));
 
         final ThingDetailsModel thingDetailsModel = new ThingDetailsModel(thingModel);
         thingDetailsModel.setOnline(thingDetails.isOnline());
         thingDetailsModel.setMillisSinceLastPublish(thingDetails.getMillisecondsSinceLastPublish());
         thingDetailsModel.setLatestData(transformLatestData(thingDetails.getLatestData()));
 
-        thingDetailsModel.setProductModel(transformProduct(thingDetails.getProduct()));
+        thingDetailsModel.setProductModel(productTransformer.transformProduct(thingDetails.getProduct()));
 
         return thingDetailsModel;
     }
@@ -56,14 +58,5 @@ public class ThingDetailsModelDataMapper implements SimpleModelDataMapper<ThingD
         }
 
         return latestDataModel;
-    }
-
-    private ProductModel transformProduct(Product product) {
-        ProductModel result = new ProductModel();
-        result.setId(product.getId());
-        result.setName(product.getName());
-        result.setHartbeat(product.getHartbeat());
-
-        return result;
     }
 }
