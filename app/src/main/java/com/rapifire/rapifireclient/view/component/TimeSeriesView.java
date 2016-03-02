@@ -18,9 +18,6 @@ public class TimeSeriesView extends RelativeLayout implements ViewWrapper.Binder
     @Bind(R.id.thing_name_text_view)
     TextView nameTextView;
 
-    @Bind(R.id.thing_id_text_view)
-    TextView idTextView;
-
     private boolean alreadyInflated = false;
     private TimeSeriesModel data;
 

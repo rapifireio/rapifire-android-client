@@ -44,7 +44,7 @@
                             />
 
                         <TextView
-                            android:id="@+id/thing_id_text_view"
+                            android:id="@+id/thing_product_name_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -54,9 +54,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -96,34 +98,6 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:layout_marginTop="16dp">
-
-                    <com.rapifire.rapifireclient.view.component.FontAwsomeView
-                        android:id="@+id/thing_product_fontawsomeview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:text="@string/fa_circle_thin"
-                        android:textColor="@color/brown"
-                        android:textSize="32sp" />
-
-                    <TextView
-                        android:id="@+id/thing_product_name_text_view"
-                        android:layout_toRightOf="@+id/thing_product_fontawsomeview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="product"
-                        android:textStyle="bold" />
-                </RelativeLayout>
             </LinearLayout>
 
             <android.support.design.widget.TabLayout

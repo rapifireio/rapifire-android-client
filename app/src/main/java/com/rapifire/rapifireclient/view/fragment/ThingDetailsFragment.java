@@ -69,8 +69,8 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     RandIcon mThingRandIcon;
     @Bind(R.id.thing_name_text_view)
     TextView mThingNameTextView;
-    @Bind(R.id.thing_id_text_view)
-    TextView mThingIdTextView;
+    @Bind(R.id.thing_product_name_text_view)
+    TextView mThingProductNameTextView;
 
     @Bind(R.id.thing_status_fontawsomeview)
     TextView mThingOnlineIcon;
@@ -78,9 +78,6 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     TextView mThingStatusTextView;
     @Bind(R.id.thing_last_publish_text_view)
     TextView mThingLastPublishTextView;
-
-    @Bind(R.id.thing_product_name_text_view)
-    TextView mThingProductNameTextView;
 
     @Bind(R.id.tab_layout)
     TabLayout tabLayout;
@@ -168,7 +165,6 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
     @Override
     public void setThingDetails(ThingDetailsModel thingDetails) {
         mThingRandIcon.setText(thingDetails.thingModel.name);
-        mThingIdTextView.setText(thingDetails.thingModel.thingId);
         mThingNameTextView.setText(thingDetails.thingModel.name);
         mThingProductNameTextView.setText(thingDetails.getProductModel().getName());
 
@@ -239,8 +235,8 @@ public class ThingDetailsFragment extends Fragment implements ThingDetailsView, 
             mThingNameTextView.setText(thingModel.name);
         }
 
-        if(mThingIdTextView != null) {
-            mThingIdTextView.setText(thingModel.thingId);
+        if(mThingProductNameTextView != null) {
+            mThingProductNameTextView.setText(thingModel.getProduct().getName());
         }
     }
 }
