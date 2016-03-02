@@ -18,7 +18,7 @@
             android:layout_marginRight="16dp" />
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -28,7 +28,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true">
                 <TextView
                     android:id="@+id/thing_name_text_view"
                     android:layout_width="wrap_content"
@@ -50,6 +51,17 @@
                     android:paddingBottom="0dp"
                     android:paddingTop="0dp"/>
             </LinearLayout>
+
+            <com.rapifire.rapifireclient.view.component.FontAwsomeView
+                android:id="@+id/thing_status_fontawsomeview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/fa_bullseye"
+                android:textColor="@color/gray"
+                android:textSize="20sp" />
+        </RelativeLayout>
         </LinearLayout>
-    </LinearLayout>
+
 </LinearLayout>

@@ -42,7 +42,9 @@ public class ThingModelDataMapper implements ModelDataMapper<ThingModel, Thing> 
         final String id = thing.getThingId();
         final String name = thing.getName();
         final ProductModel product = productTransformer.transformProduct(thing.getProduct());
+
         final ThingModel thingModel = new ThingModel(id, name, product);
+        thingModel.setOnline(thing.isOnline());
 
         return thingModel;
     }

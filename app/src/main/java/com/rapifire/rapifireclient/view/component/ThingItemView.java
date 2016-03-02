@@ -29,6 +29,9 @@ public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<
     @Bind(R.id.thing_product_name_text_view)
     TextView productNameTextView;
 
+    @Bind(R.id.thing_status_fontawsomeview)
+    TextView thingStatusTextView;
+
     private boolean alreadyInflated = false;
     private ThingModel data;
 
@@ -59,6 +62,12 @@ public class ThingItemView extends RelativeLayout implements ViewWrapper.Binder<
         nameTextView.setText(data.name);
         productNameTextView.setText(data.getProduct().getName());
         idRandIcon.setText(data.name);
+
+        if(data.isOnline()) {
+            thingStatusTextView.setTextColor(Color.GREEN);
+        }else{
+            thingStatusTextView.setTextColor(Color.GRAY);
+        }
     }
 
     public ThingModel getData() {

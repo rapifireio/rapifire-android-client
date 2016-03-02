@@ -7,6 +7,7 @@ public class Thing {
     private String thingId;
     private String name;
     private Product product;
+    private boolean online;
 
     public Thing(String thingId, String name) {
         this.thingId = thingId;
@@ -23,5 +24,9 @@ public class Thing {
 
     public Product getProduct() {
         return product;
+    }
+
+    public boolean isOnline() {
+        return online;
     }
 }

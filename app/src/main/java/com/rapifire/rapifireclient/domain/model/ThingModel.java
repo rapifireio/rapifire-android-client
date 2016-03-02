@@ -9,6 +9,7 @@ public class ThingModel implements Serializable {
     public final String thingId;
     public final String name;
     private final ProductModel product;
+    private boolean online = false;
 
     public ThingModel(String thingId, String name, ProductModel product) {
         this.thingId = thingId;
@@ -18,5 +19,13 @@ public class ThingModel implements Serializable {
 
     public ProductModel getProduct() {
         return product;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
 }
