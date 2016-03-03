@@ -8,5 +8,11 @@ public interface SigninView extends MVPView {
 
     String getPassword();
 
+    void signInStarted();
+
+    void signInFinishedBadCredentials();
+
+    void signInFinishedSuccess();
+
     void navigateToThings();
 }

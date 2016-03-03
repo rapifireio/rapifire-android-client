@@ -9,6 +9,7 @@ import com.rapifire.rapifireclient.mvp.view.SigninView;
 
 import javax.inject.Inject;
 
+import retrofit.HttpException;
 import rx.Subscriber;
 
 /**
@@ -29,12 +30,11 @@ public class SignInPresenter implements Presenter<SigninView> {
     }
 
     public void signin() {
-        view.showProgress(true);
+        view.signInStarted();
         final String username = view.getUsername();
         final String password = view.getPassword();
         signInUseCase.execute(new ThingsSubscriber(), username, password);
     }
-
 
     @Override
     public void subscribe(SigninView view) {
@@ -53,7 +53,7 @@ public class SignInPresenter implements Presenter<SigninView> {
 
         @Override
         public void onCompleted() {
-            view.showProgress(false);
+            view.signInFinishedSuccess();
             final RapifireSession rapifireSession = new RapifireSession(view.getUsername(),
                     view.getPassword());
             userComponentBuilder.createUserComponent(rapifireSession);
@@ -63,8 +63,17 @@ public class SignInPresenter implements Presenter<SigninView> {
         @Override
         public void onError(Throwable throwable) {
             throwable.printStackTrace();
-            view.showProgress(false);
-            view.showMessage("Hahahah! Nice try");
+
+            if(throwable instanceof retrofit.HttpException) {
+                HttpException httpException = (HttpException)throwable;
+                if(httpException.code() == 401) {
+                    view.signInFinishedBadCredentials();
+
+                    return;
+                }
+            }
+
+            view.showMessage(throwable.getMessage());
         }
 
         @Override

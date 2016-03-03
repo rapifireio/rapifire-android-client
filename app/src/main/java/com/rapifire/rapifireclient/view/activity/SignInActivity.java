@@ -2,8 +2,8 @@ package com.rapifire.rapifireclient.view.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,11 +34,15 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
     @Inject
     SignInPresenter signinPresenter;
 
+    @Bind(R.id.username_text_input_layout)
+    TextInputLayout usernameTextInputLayout;
     @Bind(R.id.username_edit_text)
     EditText userNameEditText;
     @Bind(R.id.profile_image_view)
     RandIcon userNameRandIcon;
 
+    @Bind(R.id.password_text_input_layout)
+    TextInputLayout passwordTextInputLayout;
     @Bind(R.id.password_edit_text)
     EditText passwordEditText;
 
@@ -55,6 +59,8 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         signinPresenter.subscribe(this);
+        usernameTextInputLayout.setErrorEnabled(true);
+        passwordTextInputLayout.setErrorEnabled(true);
         userNameEditText.setText("digitaloceanadmin");
         userNameEditText.addTextChangedListener(new TextWatcher() {
 
@@ -139,6 +145,22 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
     @OnClick(R.id.signin_button)
     public void signin() {
         signinPresenter.signin();
+    }
+
+    public void signInStarted() {
+        showProgress(true);
+        usernameTextInputLayout.setError(null);
+        passwordTextInputLayout.setError(null);
+    }
+
+    public void signInFinishedBadCredentials() {
+        showProgress(false);
+        usernameTextInputLayout.setError(getString(R.string.error_invalid_credentials));
+        passwordTextInputLayout.setError(getString(R.string.error_invalid_credentials));
+    }
+
+    public void signInFinishedSuccess() {
+        showProgress(false);
     }
 }
 
