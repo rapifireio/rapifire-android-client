@@ -155,8 +155,9 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
 
     public void signInFinishedBadCredentials() {
         showProgress(false);
-        usernameTextInputLayout.setError(getString(R.string.error_invalid_credentials));
+        usernameTextInputLayout.setError(" ");
         passwordTextInputLayout.setError(getString(R.string.error_invalid_credentials));
+        passwordEditText.setText("");
     }
 
     public void signInFinishedSuccess() {
