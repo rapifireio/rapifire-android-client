@@ -110,7 +110,17 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
 
     @Override
     public void showProgress(boolean show) {
-        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+        if(show) {
+            signinButton.setEnabled(false);
+            signinButton.setText("");
+            progressBar.setVisibility(View.VISIBLE);
+
+            return;
+        }
+
+        progressBar.setVisibility(View.GONE);
+        signinButton.setEnabled(true);
+        signinButton.setText(R.string.action_sign_in);
     }
 
     @Override
